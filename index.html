@@ -589,8 +589,8 @@
 
   <!-- LANGUAGE TOGGLE - FOOTER CENTER -->
   <div class="lang-toggle">
-    <button type="button" class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-    <button type="button" class="lang-btn" data-lang="el" onclick="switchLang('el')">ΕΛ</button>
+    <button type="button" class="lang-btn active" data-lang="en" id="lang-btn-en">EN</button>
+    <button type="button" class="lang-btn" data-lang="el" id="lang-btn-el">ΕΛ</button>
   </div>
 
   <!-- FOOTER - ENGLISH -->
@@ -620,11 +620,15 @@
 </div>
 
 <script>
+  console.log('=== AI-Automation Language Script Loading ===');
+  
   // Language switching functionality
   function switchLang(lang) {
+    console.log('switchLang function called with:', lang);
     try {
       // Update HTML lang attribute
       document.documentElement.lang = lang;
+      console.log('HTML lang set to:', lang);
       
       // Update button states
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -633,9 +637,11 @@
           btn.classList.add('active');
         }
       });
+      console.log('Button states updated');
       
       // Save preference
       localStorage.setItem('preferred-language', lang);
+      console.log('Language saved to localStorage');
       
       // Update meta tags for SEO (with null check)
       const metaLocale = document.querySelector('meta[property="og:locale"]');
@@ -645,7 +651,10 @@
         } else {
           metaLocale.setAttribute('content', 'en_US');
         }
+        console.log('Meta locale updated');
       }
+      
+      console.log('Language switch complete!');
     } catch (error) {
       console.error('Language switch error:', error);
       // Still works even if meta tag update fails
@@ -654,6 +663,25 @@
   
   // Load saved language preference on page load
   document.addEventListener('DOMContentLoaded', function() {
+    // Attach event listeners to buttons
+    const btnEn = document.getElementById('lang-btn-en');
+    const btnEl = document.getElementById('lang-btn-el');
+    
+    if (btnEn) {
+      btnEn.addEventListener('click', function() {
+        console.log('EN button clicked');
+        switchLang('en');
+      });
+    }
+    
+    if (btnEl) {
+      btnEl.addEventListener('click', function() {
+        console.log('EL button clicked');
+        switchLang('el');
+      });
+    }
+    
+    // Load saved preference
     const savedLang = localStorage.getItem('preferred-language');
     const browserLang = navigator.language || navigator.userLanguage;
     
@@ -667,6 +695,7 @@
     
     // Apply language
     switchLang(lang);
+    console.log('Language initialized to:', lang);
   });
 </script>
 
