@@ -390,11 +390,13 @@
     }
 
     /* LANGUAGE CONTENT SWITCHING */
-    [lang]:not([lang="en"]) { display: none; }
-    html[lang="el"] [lang="en"] { display: none; }
-    html[lang="el"] [lang="el"] { display: block; }
-    html[lang="en"] [lang="en"] { display: block; }
-    html[lang="en"] [lang="el"] { display: none; }
+    /* Default: show English, hide Greek */
+    html:not([lang="el"]) [lang="el"] { display: none !important; }
+    html:not([lang="el"]) [lang="en"] { display: block !important; }
+    
+    /* When Greek: hide English, show Greek */
+    html[lang="el"] [lang="en"] { display: none !important; }
+    html[lang="el"] [lang="el"] { display: block !important; }
 
     /* LANGUAGE TOGGLE - ALWAYS VISIBLE! */
     .lang-toggle {
