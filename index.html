@@ -655,4 +655,20 @@
   // Load saved language preference on page load
   document.addEventListener('DOMContentLoaded', function() {
     const savedLang = localStorage.getItem('preferred-language');
- 
+    const browserLang = navigator.language || navigator.userLanguage;
+    
+    // Determine language: saved preference > browser language > default (en)
+    let lang = 'en';
+    if (savedLang) {
+      lang = savedLang;
+    } else if (browserLang && browserLang.startsWith('el')) {
+      lang = 'el';
+    }
+    
+    // Apply language
+    switchLang(lang);
+  });
+</script>
+
+</body>
+</html>
