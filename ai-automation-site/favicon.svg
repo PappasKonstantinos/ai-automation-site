@@ -1,0 +1,23 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" fill="#0f172a"/>
+  
+  <!-- Simplified A for favicon -->
+  <path d="M17,38 L24,14 L31,38" 
+        fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Crossbar -->
+  <line x1="20" y1="29" x2="28" y2="29" stroke="#0ea5e9" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Top node -->
+  <circle cx="24" cy="14" r="2" fill="#38bdf8">
+    <animate attributeName="fill" values="#38bdf8;#0ea5e9;#38bdf8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Bottom nodes -->
+  <circle cx="17" cy="38" r="1.5" fill="#38bdf8"/>
+  <circle cx="31" cy="38" r="1.5" fill="#38bdf8"/>
+  
+  <!-- Crossbar nodes -->
+  <circle cx="20" cy="29" r="1.2" fill="#0ea5e9"/>
+  <circle cx="28" cy="29" r="1.2" fill="#0ea5e9"/>
+</svg>

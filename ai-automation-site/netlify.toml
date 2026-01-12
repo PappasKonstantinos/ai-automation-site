@@ -1,0 +1,46 @@
+# Netlify Configuration File
+
+# Form submissions
+[build]
+  publish = "."
+
+# Redirect after form submission
+[[redirects]]
+  from = "/thanks"
+  to = "/?success=true"
+  status = 302
+
+# Force HTTPS
+[[redirects]]
+  from = "http://ai-automation.gr/*"
+  to = "https://ai-automation.gr/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.ai-automation.gr/*"
+  to = "https://ai-automation.gr/:splat"
+  status = 301
+  force = true
+
+# WWW redirect (if needed)
+[[redirects]]
+  from = "https://www.ai-automation.gr/*"
+  to = "https://ai-automation.gr/:splat"
+  status = 301
+  force = true
+
+# 404 handling
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
