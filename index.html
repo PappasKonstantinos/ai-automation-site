@@ -555,104 +555,42 @@
     </div>
   </div>
 
-  <!-- CONTACT FORM - ENGLISH -->
+  <!-- CONTACT SECTION - ENGLISH -->
   <div class="card" lang="en">
-    <h2>Get Notified</h2>
-    <p style="margin-bottom: 25px;">
-      Leave your contact info and we'll notify you when we launch.
+    <h2>Get in Touch</h2>
+    <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+      Ready to automate your industrial operations? Contact us today to discuss your project.
     </p>
 
-    <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" class="contact-form">
-      <!-- Netlify form detection -->
-      <input type="hidden" name="form-name" value="contact">
-      
-      <!-- Honeypot for spam -->
-      <p style="display: none;">
-        <label>Don't fill this out: <input name="bot-field"></label>
-      </p>
+    <a href="mailto:info@ai-automation.gr" class="submit-btn" style="display: inline-block; text-decoration: none; margin-bottom: 20px;">
+      📧 Email Us: info@ai-automation.gr
+    </a>
 
-      <div class="form-group">
-        <label for="name">Name *</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="company">Company (Optional)</label>
-        <input type="text" id="company" name="company">
-      </div>
-
-      <div class="form-group">
-        <label for="message">Message (Optional)</label>
-        <textarea id="message" name="message" rows="5" placeholder="Tell us about your automation needs..."></textarea>
-      </div>
-
-      <!-- Netlify reCAPTCHA widget -->
-      <div data-netlify-recaptcha="true" style="margin: 20px 0;"></div>
-
-      <button type="submit" class="submit-btn">Notify Me</button>
-    </form>
-
-    <div class="success-message" id="success">
-      ✅ Thank you! We'll be in touch soon.
-    </div>
+    <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 20px;">
+      We typically respond within 24 hours
+    </p>
   </div>
 
-  <!-- CONTACT FORM - GREEK -->
+  <!-- CONTACT SECTION - GREEK -->
   <div class="card" lang="el">
-    <h2>Ενημερωθείτε</h2>
-    <p style="margin-bottom: 25px;">
-      Αφήστε τα στοιχεία επικοινωνίας σας και θα σας ενημερώσουμε όταν ξεκινήσουμε.
+    <h2>Επικοινωνήστε</h2>
+    <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+      Έτοιμοι να αυτοματοποιήσετε τις βιομηχανικές σας λειτουργίες; Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε το έργο σας.
     </p>
 
-    <form name="contact-el" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" class="contact-form">
-      <!-- Netlify form detection -->
-      <input type="hidden" name="form-name" value="contact-el">
-      
-      <!-- Honeypot for spam -->
-      <p style="display: none;">
-        <label>Μην συμπληρώσετε: <input name="bot-field"></label>
-      </p>
+    <a href="mailto:info@ai-automation.gr" class="submit-btn" style="display: inline-block; text-decoration: none; margin-bottom: 20px;">
+      📧 Email: info@ai-automation.gr
+    </a>
 
-      <div class="form-group">
-        <label for="name-el">Όνομα *</label>
-        <input type="text" id="name-el" name="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email-el">Email *</label>
-        <input type="email" id="email-el" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="company-el">Εταιρεία (Προαιρετικό)</label>
-        <input type="text" id="company-el" name="company">
-      </div>
-
-      <div class="form-group">
-        <label for="message-el">Μήνυμα (Προαιρετικό)</label>
-        <textarea id="message-el" name="message" rows="5" placeholder="Πείτε μας για τις ανάγκες αυτοματισμού σας..."></textarea>
-      </div>
-
-      <!-- Netlify reCAPTCHA widget -->
-      <div data-netlify-recaptcha="true" style="margin: 20px 0;"></div>
-
-      <button type="submit" class="submit-btn">Ενημερώστε με</button>
-    </form>
-
-    <div class="success-message" id="success-el">
-      ✅ Ευχαριστούμε! Θα επικοινωνήσουμε σύντομα.
-    </div>
+    <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 20px;">
+      Απαντάμε συνήθως εντός 24 ωρών
+    </p>
   </div>
 
   <!-- LANGUAGE TOGGLE - FOOTER CENTER -->
   <div class="lang-toggle">
-    <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
-    <button class="lang-btn" data-lang="el" onclick="switchLang('el')">ΕΛ</button>
+    <button type="button" class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+    <button type="button" class="lang-btn" data-lang="el" onclick="switchLang('el')">ΕΛ</button>
   </div>
 
   <!-- FOOTER - ENGLISH -->
@@ -722,18 +660,6 @@
     // Apply language
     switchLang(lang);
   });
-  
-  // Handle form submission success
-  if (window.location.search.includes('success=true')) {
-    const currentLang = document.documentElement.lang;
-    if (currentLang === 'el') {
-      document.getElementById('success-el').style.display = 'block';
-      document.querySelector('form[name="contact-el"]').style.display = 'none';
-    } else {
-      document.getElementById('success').style.display = 'block';
-      document.querySelector('form[name="contact"]').style.display = 'none';
-    }
-  }
 </script>
 
 </body>
