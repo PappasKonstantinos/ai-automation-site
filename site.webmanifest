@@ -1,8 +1,9 @@
 {
   "name": "AI-Automation.gr",
   "short_name": "AI-Auto",
-  "description": "Intelligent Industrial Automation Solutions in Greece",
-  "start_url": "/",
+  "description": "Industrial Automation, PLC, SCADA and AI-driven solutions for modern industry in Greece",
+  "start_url": "https://www.ai-automation.gr/",
+  "scope": "https://www.ai-automation.gr/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#38bdf8",

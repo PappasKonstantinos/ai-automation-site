@@ -9,17 +9,17 @@
       "destination": "/?success=true",
       "permanent": false
     },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.ai-automation.gr"
-        }
-      ],
-      "destination": "https://ai-automation.gr/$1",
-      "permanent": true
-    }
+	{
+	  "source": "/(.*)",
+	  "has": [
+		{
+		  "type": "host",
+		  "value": "ai-automation.gr"
+		}
+	  ],
+	  "destination": "https://www.ai-automation.gr/$1",
+	  "permanent": true
+	}
   ],
   "headers": [
     {
