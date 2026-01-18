@@ -934,6 +934,10 @@
                 <div class="user-info">
                     <span class="user-email" id="userEmail"></span>
                     <span class="user-role" id="userRole"></span>
+                    <button class="btn btn-dark" id="adminSettingsBtn" onclick="openAdminModal()" style="display: none;">
+                        <span>⚙️</span>
+                        <span id="adminSettingsText">Settings</span>
+                    </button>
                     <button class="btn btn-dark" onclick="logout()">
                         <span id="logoutText">Logout</span>
                     </button>
@@ -1158,6 +1162,43 @@
             </div>
 
             <div id="loadAlert" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- Admin Settings Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdminModal()">×</button>
+            <h2 id="adminModalTitle">Admin Settings</h2>
+
+            <!-- Password Change Section -->
+            <div class="form-group">
+                <label id="currentPassLabel">Current Password</label>
+                <input type="password" id="adminCurrentPass" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+                <label id="newPassLabel">New Password</label>
+                <input type="password" id="adminNewPass" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+                <label id="confirmPassLabel">Confirm New Password</label>
+                <input type="password" id="adminConfirmPass" placeholder="••••••••" required>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-dark" onclick="closeAdminModal()">
+                    <span id="adminCancelText">Cancel</span>
+                </button>
+                <button class="btn btn-cyan" onclick="changeAdminPassword()">
+                    <span class="btn-icon">🔐</span>
+                    <span id="adminChangeText">Change Password</span>
+                </button>
+            </div>
+
+            <div id="adminAlert" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         // ==================== CONFIGURATION ====================
@@ -1266,7 +1307,14 @@
                 adminRole: 'ADMIN',
                 userRole: 'USER',
                 loadBtnTextShort: 'Load',
-                deleteBtnText: 'Delete'
+                deleteBtnText: 'Delete',
+                adminSettingsText: 'Settings',
+                adminModalTitle: 'Admin Settings',
+                currentPassLabel: 'Current Password',
+                newPassLabel: 'New Password',
+                confirmPassLabel: 'Confirm New Password',
+                adminCancelText: 'Cancel',
+                adminChangeText: 'Change Password'
             },
             gr: {
                 headerTitle: 'IoT Builder',
@@ -1313,7 +1361,14 @@
                 adminRole: 'ΔΙΑΧΕΙΡΙΣΤΗΣ',
                 userRole: 'ΧΡΗΣΤΗΣ',
                 loadBtnTextShort: 'Φόρτωση',
-                deleteBtnText: 'Διαγραφή'
+                deleteBtnText: 'Διαγραφή',
+                adminSettingsText: 'Ρυθμίσεις',
+                adminModalTitle: 'Ρυθμίσεις Διαχειριστή',
+                currentPassLabel: 'Τρέχων Κωδικός',
+                newPassLabel: 'Νέος Κωδικός',
+                confirmPassLabel: 'Επιβεβαίωση Νέου Κωδικού',
+                adminCancelText: 'Ακύρωση',
+                adminChangeText: 'Αλλαγή Κωδικού'
             }
         };
 
@@ -1344,6 +1399,12 @@
             
             const roleText = currentUser.is_admin ? translations[currentLang].adminRole : translations[currentLang].userRole;
             document.getElementById('userRole').textContent = roleText;
+            
+            // Show admin settings button if admin
+            const adminBtn = document.getElementById('adminSettingsBtn');
+            if (adminBtn) {
+                adminBtn.style.display = currentUser.is_admin ? 'flex' : 'none';
+            }
             
             updateStatusMessage();
         }
@@ -1492,6 +1553,15 @@
             document.getElementById('saveCancelText').textContent = t.saveCancelText;
             document.getElementById('saveConfirmText').textContent = t.saveConfirmText;
             document.getElementById('loadModalTitle').textContent = t.loadModalTitle;
+            
+            // Admin settings translations
+            if (document.getElementById('adminSettingsText')) document.getElementById('adminSettingsText').textContent = t.adminSettingsText;
+            if (document.getElementById('adminModalTitle')) document.getElementById('adminModalTitle').textContent = t.adminModalTitle;
+            if (document.getElementById('currentPassLabel')) document.getElementById('currentPassLabel').textContent = t.currentPassLabel;
+            if (document.getElementById('newPassLabel')) document.getElementById('newPassLabel').textContent = t.newPassLabel;
+            if (document.getElementById('confirmPassLabel')) document.getElementById('confirmPassLabel').textContent = t.confirmPassLabel;
+            if (document.getElementById('adminCancelText')) document.getElementById('adminCancelText').textContent = t.adminCancelText;
+            if (document.getElementById('adminChangeText')) document.getElementById('adminChangeText').textContent = t.adminChangeText;
             
             if (currentUser) {
                 const roleText = currentUser.is_admin ? t.adminRole : t.userRole;
@@ -2147,6 +2217,88 @@
 
         function showLoadAlert(message, type) {
             const alert = document.getElementById('loadAlert');
+            alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        // ==================== ADMIN SETTINGS ====================
+        function openAdminModal() {
+            if (!currentUser || !currentUser.is_admin) {
+                showAlert('Admin access required', 'error');
+                return;
+            }
+            
+            document.getElementById('adminModal').classList.add('active');
+            document.getElementById('adminAlert').innerHTML = '';
+            document.getElementById('adminCurrentPass').value = '';
+            document.getElementById('adminNewPass').value = '';
+            document.getElementById('adminConfirmPass').value = '';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        async function changeAdminPassword() {
+            const currentPass = document.getElementById('adminCurrentPass').value;
+            const newPass = document.getElementById('adminNewPass').value;
+            const confirmPass = document.getElementById('adminConfirmPass').value;
+            
+            // Validation
+            if (!currentPass || !newPass || !confirmPass) {
+                showAdminAlert(currentLang === 'en' ? 'Please fill all fields' : 'Συμπληρώστε όλα τα πεδία', 'error');
+                return;
+            }
+            
+            if (newPass.length < 6) {
+                showAdminAlert(currentLang === 'en' ? 'New password must be at least 6 characters' : 'Ο νέος κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες', 'error');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                showAdminAlert(currentLang === 'en' ? 'Passwords do not match' : 'Οι κωδικοί δεν ταιριάζουν', 'error');
+                return;
+            }
+            
+            if (currentPass === newPass) {
+                showAdminAlert(currentLang === 'en' ? 'New password must be different from current password' : 'Ο νέος κωδικός πρέπει να είναι διαφορετικός από τον τρέχοντα', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/admin/change-password`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        old_password: currentPass,
+                        new_password: newPass
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAdminAlert(currentLang === 'en' ? '✅ Password changed successfully!' : '✅ Ο κωδικός άλλαξε επιτυχώς!', 'success');
+                    setTimeout(() => {
+                        closeAdminModal();
+                        showAlert(currentLang === 'en' ? 'Password updated. Please login again with new password.' : 'Ο κωδικός ενημερώθηκε. Παρακαλώ συνδεθείτε ξανά με τον νέο κωδικό.', 'success');
+                        setTimeout(() => {
+                            logout();
+                        }, 2000);
+                    }, 1500);
+                } else {
+                    showAdminAlert(data.detail || (currentLang === 'en' ? 'Failed to change password' : 'Αποτυχία αλλαγής κωδικού'), 'error');
+                }
+            } catch (error) {
+                showAdminAlert(currentLang === 'en' ? 'Connection error. Please try again.' : 'Σφάλμα σύνδεσης. Δοκιμάστε ξανά.', 'error');
+                console.error('Password change error:', error);
+            }
+        }
+
+        function showAdminAlert(message, type) {
+            const alert = document.getElementById('adminAlert');
             alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
         }
 
