@@ -825,6 +825,7 @@
         }
     </style>
 </head>
+</script>
 <body>
     <!-- Auth Modal -->
     <div class="modal" id="auth-modal">
@@ -1039,6 +1040,7 @@
     </div>
 
    <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script> -->
+   <script>
         // Configuration
         const API_URL = 'https://iot-simulator-backend.onrender.com';
         
@@ -1819,9 +1821,6 @@
                     { type: 'alarm', x: 250, y: 350 }
                 ]
             };
-            
-            const scenarioComponents = scenarios[type];
-            scenarioComponents.forEach(sc => {
-                const compData = componentTypes[currentLang].find(c => c.id === sc.type);
-                if (compData) {
+</script>        
+
        
