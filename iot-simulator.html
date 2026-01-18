@@ -3,26 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IoT Builder Simulator | AI Automation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>IoT Builder | AI-Automation.gr</title>
     <style>
-        :root {
-            --bg-dark: #0a0e27;
-            --bg-darker: #050818;
-            --accent-primary: #00f5ff;
-            --accent-secondary: #ff00ea;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #ffffff;
-            --text-secondary: #a0aec0;
-            --success: #00ff88;
-            --error: #ff3366;
-            --warning: #ffaa00;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -30,128 +12,58 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f1923 0%, #1a2332 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 234, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
+            color: #e2e8f0;
         }
 
         /* Header */
         .header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: rgba(15, 25, 35, 0.95);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #06b6d4;
+        }
+
+        .logo-icon {
+            font-size: 28px;
         }
 
         .header-controls {
             display: flex;
-            gap: 1rem;
+            gap: 12px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem 1rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 100px;
-            font-size: 0.9rem;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            gap: 0.125rem;
-        }
-
-        .user-email {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .user-role {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .admin-badge {
-            background: linear-gradient(135deg, var(--accent-secondary), #ff6b9d);
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
+        /* Buttons */
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.9rem;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             position: relative;
             overflow: hidden;
         }
@@ -164,7 +76,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -174,39 +86,385 @@
             height: 300px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary), #0099ff);
-            color: var(--bg-dark);
+        .btn-icon {
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-secondary {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
+        .btn span {
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--error), #cc0044);
-            color: var(--text-primary);
+        .btn-cyan {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
         }
 
-        .lang-toggle {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-family: 'Outfit', sans-serif;
+        .btn-cyan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .btn-dark {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: #06b6d4;
+        }
+
+        .btn-dark:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: #06b6d4;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Main Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 70px);
+        }
+
+        /* Panels */
+        .panel {
+            background: rgba(15, 25, 35, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .panel-icon {
+            font-size: 24px;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #06b6d4;
+        }
+
+        /* Components Library */
+        .component-library {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .component-item {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            cursor: grab;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .component-item:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: #06b6d4;
+            transform: translateX(5px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .component-item:active {
+            cursor: grabbing;
+        }
+
+        .component-icon {
+            font-size: 28px;
+            filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.5));
+        }
+
+        .component-info {
+            flex: 1;
+        }
+
+        .component-name {
             font-weight: 600;
+            color: #e2e8f0;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .component-desc {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* Workspace */
+        .workspace {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .workspace-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .canvas-container {
+            flex: 1;
+            background: rgba(15, 25, 35, 0.8);
+            border: 2px dashed rgba(6, 182, 212, 0.3);
+            border-radius: 12px;
+            position: relative;
+            overflow: auto;
+            min-height: 400px;
+        }
+
+        .canvas-container.drag-over {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, 0.05);
+            box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .canvas-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        .canvas-placeholder-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .canvas-placeholder-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .status-message {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 3px solid #06b6d4;
+            padding: 12px 15px;
+            border-radius: 6px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* Placed Components */
+        .placed-component {
+            position: absolute;
+            background: rgba(15, 25, 35, 0.95);
+            border: 2px solid rgba(6, 182, 212, 0.5);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: move;
+            min-width: 130px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .placed-component:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+            transform: scale(1.05);
+        }
+
+        .placed-component.active {
+            border-color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
+        }
+
+        .placed-icon {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+        }
+
+        .placed-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .placed-value {
+            text-align: center;
+            color: #06b6d4;
+            font-weight: 700;
+            font-size: 18px;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .component-remove {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: 2px solid rgba(15, 25, 35, 1);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        .component-remove:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+        }
+
+        /* Statistics */
+        .stat-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #06b6d4;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Scenarios */
+        .scenarios {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .scenario-btn {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            padding: 12px;
             cursor: pointer;
             transition: all 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .lang-toggle:hover {
-            background: var(--glass-border);
+        .scenario-btn:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: #06b6d4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            transform: translateX(5px);
         }
 
-        /* Modal */
+        .scenario-icon {
+            font-size: 24px;
+        }
+
+        .scenario-info {
+            flex: 1;
+        }
+
+        .scenario-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .scenario-desc {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -219,833 +477,607 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s;
+            padding: 20px;
         }
 
         .modal.active {
             display: flex;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .modal-content {
-            background: var(--bg-darker);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-input {
+            background: linear-gradient(135deg, #1a2332 0%, #0f1923 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
             width: 100%;
-            padding: 0.875rem 1rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(6, 182, 212, 0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            background: rgba(0, 245, 255, 0.05);
-        }
-
-        .form-toggle {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .form-toggle a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .form-toggle a:hover {
-            text-decoration: underline;
-        }
-
-        .close-modal {
+        .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
+            top: 15px;
+            right: 15px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
             cursor: pointer;
-            width: 32px;
-            height: 32px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
             transition: all 0.3s;
         }
 
-        .close-modal:hover {
-            background: var(--glass-bg);
-            color: var(--text-primary);
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+            transform: rotate(90deg);
         }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1600px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .modal h2 {
+            color: #06b6d4;
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
         }
 
-        .main-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr 320px;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        @media (max-width: 1200px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-
-        .panel-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .panel-title-icon {
-            font-size: 1.5rem;
-        }
-
-        /* Components Library */
-        .components-library {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .component-item {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 234, 0.1));
-            border: 1px solid var(--glass-border);
-            padding: 1rem;
-            border-radius: 12px;
-            cursor: move;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            user-select: none;
-        }
-
-        .component-item:hover {
-            transform: translateX(8px) scale(1.02);
-            border-color: var(--accent-primary);
-            box-shadow: 0 8px 32px rgba(0, 245, 255, 0.2);
-        }
-
-        .component-icon {
-            font-size: 1.75rem;
-            filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.5));
-        }
-
-        .component-info h4 {
-            font-size: 0.95rem;
-            margin-bottom: 0.25rem;
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e2e8f0;
             font-weight: 600;
+            font-size: 14px;
         }
 
-        .component-info p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        /* Canvas */
-        .canvas-area {
-            background: rgba(10, 14, 39, 0.5);
-            border: 2px dashed var(--glass-border);
-            border-radius: 16px;
-            position: relative;
-            min-height: 600px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .canvas-area.drag-over {
-            border-color: var(--accent-primary);
-            background: rgba(0, 245, 255, 0.05);
-            box-shadow: inset 0 0 40px rgba(0, 245, 255, 0.1);
-        }
-
-        .drop-hint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        .drop-hint-icon {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.3));
-        }
-
-        .drop-hint-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        /* Placed Components */
-        .placed-component {
-            position: absolute;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1rem;
-            cursor: move;
-            min-width: 140px;
-            transition: all 0.3s;
-        }
-
-        .placed-component:hover {
-            border-color: var(--accent-primary);
-            box-shadow: 0 8px 32px rgba(0, 245, 255, 0.3);
-            z-index: 10;
-        }
-
-        .component-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .component-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.75rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            margin: 0.75rem 0;
-        }
-
-        .component-status {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .component-controls {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .component-btn {
-            flex: 1;
-            padding: 0.4rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .component-btn:hover {
-            background: var(--glass-border);
-            transform: translateY(-2px);
-        }
-
-        .delete-btn {
-            background: linear-gradient(135deg, var(--error), #cc0044);
-            border-color: var(--error);
-        }
-
-        /* Control Buttons */
-        .control-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .control-btn {
-            padding: 0.875rem 1.25rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-start {
-            background: linear-gradient(135deg, var(--success), #00cc66);
-            color: var(--bg-dark);
-        }
-
-        .btn-stop {
-            background: linear-gradient(135deg, var(--error), #cc0044);
-            color: white;
-        }
-
-        .btn-clear {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
-        }
-
-        .btn-save {
-            background: linear-gradient(135deg, var(--accent-primary), #0099ff);
-            color: var(--bg-dark);
-        }
-
-        .btn-export {
-            background: linear-gradient(135deg, var(--warning), #ff8800);
-            color: var(--bg-dark);
-        }
-
-        .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        .control-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Simulation Status */
-        .simulation-status {
-            padding: 1rem;
-            background: rgba(0, 245, 255, 0.05);
-            border-left: 4px solid var(--accent-primary);
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
             border-radius: 8px;
-            margin-top: 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-        }
-
-        .simulation-status.running {
-            background: rgba(0, 255, 136, 0.05);
-            border-color: var(--success);
-        }
-
-        /* Stats Cards */
-        .stats-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 234, 0.1));
-            border: 1px solid var(--glass-border);
-            padding: 1.25rem;
-            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 14px;
             transition: all 0.3s;
         }
 
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0, 245, 255, 0.2);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+            background: rgba(30, 41, 59, 0.8);
         }
 
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        /* Auth Tabs */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
             font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .auth-tab.active {
+            color: #06b6d4;
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #06b6d4, #10b981);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        /* User Info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 15px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 8px;
+        }
+
+        .user-email {
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-role {
+            padding: 4px 10px;
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.4);
         }
 
         /* Project List */
         .project-list {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            max-height: 400px;
+            gap: 12px;
+            max-height: 500px;
             overflow-y: auto;
         }
 
         .project-item {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 1rem;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
             border-radius: 10px;
-            cursor: pointer;
+            padding: 15px;
             transition: all 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .project-item:hover {
-            border-color: var(--accent-primary);
-            background: rgba(0, 245, 255, 0.05);
-            transform: translateX(4px);
+            background: rgba(30, 41, 59, 0.9);
+            border-color: #06b6d4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
 
-        .project-info h4 {
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
         }
 
-        .project-info p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+        .project-name {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 16px;
         }
 
         .project-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 6px;
         }
 
-        .icon-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+        .project-actions .btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .project-desc {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .project-meta {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
+            gap: 15px;
+            font-size: 11px;
+            color: #64748b;
         }
 
-        .icon-btn:hover {
-            background: var(--glass-border);
-            transform: scale(1.1);
-        }
-
-        /* Scenarios */
-        .scenario-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .scenario-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 1rem;
-            border-radius: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: left;
-        }
-
-        .scenario-btn:hover {
-            border-color: var(--accent-primary);
-            background: rgba(0, 245, 255, 0.05);
-            transform: translateX(4px);
-        }
-
-        /* Pulse animation */
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Alert */
+        /* Alerts */
         .alert {
-            padding: 1rem;
+            padding: 12px 15px;
             border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .alert-error {
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
+            margin-bottom: 15px;
+            font-size: 14px;
+            border-left: 3px solid;
         }
 
         .alert-success {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #6ee7b7;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #fca5a5;
         }
 
         .alert-warning {
-            background: rgba(255, 170, 0, 0.1);
-            border: 1px solid var(--warning);
-            color: var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+            color: #fcd34d;
+        }
+
+        .alert-info {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06b6d4;
+            color: #67e8f9;
         }
 
         /* Footer */
         .footer {
+            background: rgba(15, 25, 35, 0.95);
+            border-top: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 15px 30px;
             text-align: center;
-            padding: 3rem 1rem;
-            margin-top: 4rem;
-            background: var(--glass-bg);
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-secondary);
+            color: #64748b;
+            font-size: 13px;
         }
 
         .footer a {
-            color: var(--accent-primary);
+            color: #06b6d4;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: color 0.3s;
         }
 
         .footer a:hover {
-            color: var(--accent-secondary);
+            color: #10b981;
         }
 
         /* Loading Spinner */
         .spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-top-color: #06b6d4;
             border-radius: 50%;
-            border-top-color: var(--accent-primary);
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Hide scrollbar but keep functionality */
-        .project-list::-webkit-scrollbar {
-            width: 6px;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
 
-        .project-list::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .project-list::-webkit-scrollbar-thumb {
-            background: var(--glass-border);
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.3);
             border-radius: 10px;
         }
 
-        .project-list::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-primary);
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #06b6d4 0%, #10b981 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .panel:first-child,
+            .panel:last-child {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .header-controls {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .workspace-controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
-</script>
 <body>
-    <!-- Auth Modal -->
-    <div class="modal" id="auth-modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeAuthModal()">×</button>
-            
-            <!-- Login Form -->
-            <div id="login-form">
-                <h2 class="modal-header" id="login-title">Sign In</h2>
-                <div id="login-error"></div>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="login-email" id="login-email-label">Email</label>
-                        <input type="email" id="login-email" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="login-password" id="login-password-label">Password</label>
-                        <input type="password" id="login-password" class="form-input" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="login-btn">
-                        Sign In
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span id="headerTitle">IoT Builder</span>
+        </div>
+        
+        <div class="header-controls">
+            <!-- Language Toggle -->
+            <button class="btn btn-dark" id="langToggle" onclick="toggleLanguage()">
+                <span class="btn-icon">🌐</span>
+                <span id="langText">Ελληνικά</span>
+            </button>
+
+            <!-- User Section -->
+            <div id="userSection" style="display: none;">
+                <div class="user-info">
+                    <span class="user-email" id="userEmail"></span>
+                    <span class="user-role" id="userRole"></span>
+                    <button class="btn btn-dark" onclick="logout()">
+                        <span id="logoutText">Logout</span>
                     </button>
-                </form>
-                <div class="form-toggle">
-                    <span id="no-account-text">Don't have an account?</span>
-                    <a onclick="showRegister()" id="register-link">Register</a>
                 </div>
             </div>
 
-            <!-- Register Form -->
-            <div id="register-form" style="display: none;">
-                <h2 class="modal-header" id="register-title">Create Account</h2>
-                <div id="register-error"></div>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="register-name" id="register-name-label">Full Name (Optional)</label>
-                        <input type="text" id="register-name" class="form-input">
+            <!-- Auth Button -->
+            <button class="btn btn-cyan" id="authBtn" onclick="openAuthModal()">
+                <span class="btn-icon">🔐</span>
+                <span id="authBtnText">Sign In</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Panel: Components -->
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">📦</span>
+                <h2 class="panel-title" id="componentsTitle">Components</h2>
+            </div>
+            <div class="component-library" id="componentLibrary">
+                <!-- Components will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Center: Workspace -->
+        <div class="workspace">
+            <div class="workspace-controls">
+                <button class="btn btn-green" id="simulateBtn" onclick="toggleSimulation()">
+                    <span class="btn-icon">▶️</span>
+                    <span id="simulateBtnText">Start</span>
+                </button>
+                <button class="btn btn-pink" id="stopBtn" onclick="toggleSimulation()" style="display: none;">
+                    <span class="btn-icon">⏹️</span>
+                    <span id="stopBtnText">Stop</span>
+                </button>
+                <button class="btn btn-blue" onclick="openSaveModal()">
+                    <span class="btn-icon">💾</span>
+                    <span id="saveBtnText">Save</span>
+                </button>
+                <button class="btn btn-blue" onclick="openLoadModal()">
+                    <span class="btn-icon">📂</span>
+                    <span id="loadBtnText">Load</span>
+                </button>
+                <button class="btn btn-orange" onclick="exportToPNG()">
+                    <span class="btn-icon">📸</span>
+                    <span id="exportBtnText">Export PNG</span>
+                </button>
+                <button class="btn btn-dark" onclick="clearCanvas()">
+                    <span class="btn-icon">🗑️</span>
+                    <span id="clearBtnText">Clear</span>
+                </button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-icon">💡</span>
+                    <h2 class="panel-title" id="workspaceTitle">Workspace</h2>
+                </div>
+                <div class="canvas-container" id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="canvas-placeholder" id="canvasPlaceholder">
+                        <div class="canvas-placeholder-icon">🎯</div>
+                        <div class="canvas-placeholder-text" id="placeholderText">Drag components here</div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="register-email" id="register-email-label">Email</label>
-                        <input type="email" id="register-email" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="register-password" id="register-password-label">Password</label>
-                        <input type="password" id="register-password" class="form-input" required minlength="6">
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="register-btn">
-                        Create Account
-                    </button>
-                </form>
-                <div class="form-toggle">
-                    <span id="have-account-text">Already have an account?</span>
-                    <a onclick="showLogin()" id="login-link">Sign In</a>
+                </div>
+                <div class="status-message" id="statusMessage">
+                    <span id="statusText">Ready. Sign in to save projects.</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Right Panel: Statistics & Scenarios -->
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">📊</span>
+                <h2 class="panel-title" id="statsTitle">Statistics</h2>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-label" id="componentsLabel">COMPONENTS</div>
+                <div class="stat-value" id="componentsCount">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label" id="connectionsLabel">CONNECTIONS</div>
+                <div class="stat-value" id="connectionsCount">0</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label" id="dataSecLabel">DATA/SEC</div>
+                <div class="stat-value" id="dataSecCount">0</div>
+            </div>
+
+            <div class="panel-header" style="margin-top: 30px;">
+                <span class="panel-icon">🎯</span>
+                <h2 class="panel-title" id="scenariosTitle">Scenarios</h2>
+            </div>
+
+            <div class="scenarios">
+                <button class="scenario-btn" onclick="loadScenario('warehouse')">
+                    <span class="scenario-icon">🏭</span>
+                    <div class="scenario-info">
+                        <div class="scenario-name" id="scenario1Name">Warehouse Monitor</div>
+                        <div class="scenario-desc" id="scenario1Desc">PLC + Sensors + Gateway</div>
+                    </div>
+                </button>
+                <button class="scenario-btn" onclick="loadScenario('temperature')">
+                    <span class="scenario-icon">🌡️</span>
+                    <div class="scenario-info">
+                        <div class="scenario-name" id="scenario2Name">Temperature Control</div>
+                        <div class="scenario-desc" id="scenario2Desc">Sensors + Actuators + Alarm</div>
+                    </div>
+                </button>
+                <button class="scenario-btn" onclick="loadScenario('inventory')">
+                    <span class="scenario-icon">📦</span>
+                    <div class="scenario-info">
+                        <div class="scenario-name" id="scenario3Name">Inventory Tracking</div>
+                        <div class="scenario-desc" id="scenario3Desc">Motion + PLC + Gateway</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Built for <a href="https://ai-automation.gr" target="_blank">AI-Automation.gr</a> | Industrial IoT & Automation Solutions
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
+            <h2 id="authModalTitle">Authentication</h2>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')" id="loginTab">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('signup')" id="signupTab">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label id="emailLabel1">Email</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label id="passwordLabel1">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-cyan" onclick="handleLogin()">
+                        <span id="loginSubmitText">Login</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label id="emailLabel2">Email</label>
+                    <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label id="passwordLabel2">Password</label>
+                    <input type="password" id="signupPassword" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label id="fullNameLabel">Full Name</label>
+                    <input type="text" id="signupFullName" placeholder="John Doe" required>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-green" onclick="handleSignup()">
+                        <span id="signupSubmitText">Create Account</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="authAlert" style="margin-top: 15px;"></div>
         </div>
     </div>
 
     <!-- Save Project Modal -->
-    <div class="modal" id="save-modal">
+    <div class="modal" id="saveModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeSaveModal()">×</button>
-            <h2 class="modal-header" id="save-title">Save Project</h2>
-            <div id="save-error"></div>
-            <form onsubmit="handleSaveProject(event)">
-                <div class="form-group">
-                    <label class="form-label" for="project-name" id="project-name-label">Project Name</label>
-                    <input type="text" id="project-name" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="project-desc" id="project-desc-label">Description (Optional)</label>
-                    <input type="text" id="project-desc" class="form-input">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" id="save-project-btn">
-                    Save Project
+            <button class="modal-close" onclick="closeSaveModal()">×</button>
+            <h2 id="saveModalTitle">Save Project</h2>
+
+            <div class="form-group">
+                <label id="projectNameLabel">Project Name</label>
+                <input type="text" id="projectName" placeholder="My IoT Project" required>
+            </div>
+            <div class="form-group">
+                <label id="projectDescLabel">Description (optional)</label>
+                <textarea id="projectDesc" placeholder="Describe your IoT setup..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-dark" onclick="closeSaveModal()">
+                    <span id="saveCancelText">Cancel</span>
                 </button>
-            </form>
+                <button class="btn btn-cyan" onclick="saveProject()">
+                    <span class="btn-icon">💾</span>
+                    <span id="saveConfirmText">Save</span>
+                </button>
+            </div>
+
+            <div id="saveAlert" style="margin-top: 15px;"></div>
         </div>
     </div>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="logo">
-            <span>⚡</span>
-            <span>IoT Builder</span>
-        </div>
-        <div class="header-controls">
-            <button class="lang-toggle" onclick="toggleLanguage()">
-                <span id="lang-btn-text">Ελληνικά</span>
-            </button>
-            
-            <div id="guest-controls" style="display: flex; gap: 0.5rem;">
-                <button class="btn btn-primary" onclick="openAuthModal()" id="signin-btn">Sign In</button>
+    <!-- Load Project Modal -->
+    <div class="modal" id="loadModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLoadModal()">×</button>
+            <h2 id="loadModalTitle">Load Project</h2>
+
+            <div id="projectList" class="project-list">
+                <!-- Projects will be populated by JavaScript -->
             </div>
 
-            <div id="user-controls" style="display: none;">
-                <div class="user-info">
-                    <div class="user-avatar" id="user-avatar">U</div>
-                    <div class="user-details">
-                        <div class="user-email" id="user-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0174726473416479606c716d642f626e6c">[email&#160;protected]</a></div>
-                        <div class="user-role">
-                            <span id="user-role-text">User</span>
-                            <span id="project-limit-text"></span>
-                        </div>
-                    </div>
-                    <div id="admin-badge" style="display: none;">
-                        <span class="admin-badge">ADMIN</span>
-                    </div>
-                    <button class="btn btn-danger" onclick="logout()" id="logout-btn" style="margin-left: 1rem;">
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="main-grid">
-            <!-- Components Library -->
-            <div class="panel">
-                <div class="panel-title">
-                    <span class="panel-title-icon">📦</span>
-                    <span id="components-title">Components</span>
-                </div>
-                <div class="components-library" id="components-library">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <!-- Canvas Area -->
-            <div class="panel">
-                <div class="panel-title">
-                    <span class="panel-title-icon">🎨</span>
-                    <span id="canvas-title">Workspace</span>
-                </div>
-                <div class="canvas-area" id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
-                    <svg id="connection-svg" style="position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></svg>
-                    <div class="drop-hint" id="drop-hint">
-                        <div class="drop-hint-icon">🎯</div>
-                        <div class="drop-hint-text" id="drop-hint-text">Drag components here</div>
-                    </div>
-                </div>
-                <div class="control-buttons">
-                    <button class="control-btn btn-start" onclick="startSimulation()" id="btn-start">▶️ Start</button>
-                    <button class="control-btn btn-stop" onclick="stopSimulation()" id="btn-stop">⏹️ Stop</button>
-                    <button class="control-btn btn-save" onclick="openSaveModal()" id="btn-save" disabled>💾 Save</button>
-                    <button class="control-btn btn-export" onclick="exportPNG()" id="btn-export">📸 Export PNG</button>
-                    <button class="control-btn btn-clear" onclick="clearCanvas()" id="btn-clear">🗑️ Clear</button>
-                </div>
-                <div class="simulation-status" id="sim-status">
-                    <span id="status-text">Ready. Sign in to save projects.</span>
-                </div>
-            </div>
-
-            <!-- Stats & Projects -->
-            <div class="panel">
-                <div class="panel-title">
-                    <span class="panel-title-icon">📊</span>
-                    <span id="stats-title">Statistics</span>
-                </div>
-                <div class="stats-panel">
-                    <div class="stat-card">
-                        <div class="stat-label" id="stat-components-label">Components</div>
-                        <div class="stat-value" id="stat-components">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label" id="stat-connections-label">Connections</div>
-                        <div class="stat-value" id="stat-connections">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label" id="stat-data-label">Data/sec</div>
-                        <div class="stat-value" id="stat-data">0</div>
-                    </div>
-                </div>
-
-                <!-- My Projects -->
-                <div id="projects-section" style="margin-top: 2rem; display: none;">
-                    <div class="panel-title">
-                        <span class="panel-title-icon">💼</span>
-                        <span id="projects-title">My Projects</span>
-                    </div>
-                    <div class="project-list" id="project-list">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Scenarios -->
-                <div style="margin-top: 2rem;">
-                    <div class="panel-title">
-                        <span class="panel-title-icon">🎯</span>
-                        <span id="scenarios-title">Scenarios</span>
-                    </div>
-                    <div class="scenario-buttons">
-                        <button class="scenario-btn" onclick="loadScenario('warehouse')" id="scenario-warehouse">
-                            📦 Warehouse Monitor
-                        </button>
-                        <button class="scenario-btn" onclick="loadScenario('temperature')" id="scenario-temp">
-                            🌡️ Temperature Control
-                        </button>
-                        <button class="scenario-btn" onclick="loadScenario('inventory')" id="scenario-inventory">
-                            📊 Inventory Tracking
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p id="footer-text">Built for <a href="https://ai-automation.gr" target="_blank">AI-Automation.gr</a> | Industrial IoT & Automation Solutions</p>
-    </div>
-
-   <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script> -->
-   <script>
-        // Configuration
+            <div id="loadAlert" style="margin-top: 15px;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // ==================== CONFIGURATION ====================
         const API_URL = 'https://iot-simulator-backend.onrender.com';
         
-        // State
-        let currentLang = 'en';
         let currentUser = null;
         let authToken = null;
         let placedComponents = [];
@@ -1053,13 +1085,15 @@
         let simulationInterval = null;
         let componentCounter = 0;
         let currentProjectId = null;
+        let currentLang = 'en';
+        let dataPerSec = 0;
 
-        // Component types definitions
+        // ==================== COMPONENT DEFINITIONS ====================
         const componentTypes = {
             en: [
                 { id: 'temp-sensor', icon: '🌡️', name: 'Temperature Sensor', desc: 'Monitors temperature', type: 'sensor', unit: '°C' },
                 { id: 'humidity-sensor', icon: '💧', name: 'Humidity Sensor', desc: 'Monitors humidity', type: 'sensor', unit: '%' },
-                { id: 'motion-sensor', icon: '👁️', name: 'Motion Detector', desc: 'Detects movement', type: 'sensor', unit: 'bool' },
+                { id: 'motion-sensor', icon: '👁️', name: 'Motion Detector', desc: 'Detects movement', type: 'sensor', unit: '' },
                 { id: 'plc', icon: '🖥️', name: 'PLC Controller', desc: 'Siemens S7-1200', type: 'controller', unit: '' },
                 { id: 'gateway', icon: '📡', name: 'IoT Gateway', desc: 'MQTT/Modbus', type: 'gateway', unit: '' },
                 { id: 'motor', icon: '⚙️', name: 'Motor/Actuator', desc: 'Controls movement', type: 'actuator', unit: 'RPM' },
@@ -1069,122 +1103,142 @@
             gr: [
                 { id: 'temp-sensor', icon: '🌡️', name: 'Αισθητήρας Θερμοκρασίας', desc: 'Μετρά θερμοκρασία', type: 'sensor', unit: '°C' },
                 { id: 'humidity-sensor', icon: '💧', name: 'Αισθητήρας Υγρασίας', desc: 'Μετρά υγρασία', type: 'sensor', unit: '%' },
-                { id: 'motion-sensor', icon: '👁️', name: 'Ανιχνευτής Κίνησης', desc: 'Εντοπίζει κίνηση', type: 'sensor', unit: 'bool' },
+                { id: 'motion-sensor', icon: '👁️', name: 'Ανιχνευτής Κίνησης', desc: 'Εντοπίζει κίνηση', type: 'sensor', unit: '' },
                 { id: 'plc', icon: '🖥️', name: 'Ελεγκτής PLC', desc: 'Siemens S7-1200', type: 'controller', unit: '' },
-                { id: 'gateway', icon: '📡', name: 'IoT Gateway', desc: 'MQTT/Modbus', type: 'gateway', unit: '' },
+                { id: 'gateway', icon: '📡', name: 'Πύλη IoT', desc: 'MQTT/Modbus', type: 'gateway', unit: '' },
                 { id: 'motor', icon: '⚙️', name: 'Κινητήρας', desc: 'Έλεγχος κίνησης', type: 'actuator', unit: 'RPM' },
                 { id: 'valve', icon: '🔧', name: 'Βαλβίδα', desc: 'Έλεγχος ροής', type: 'actuator', unit: '%' },
                 { id: 'alarm', icon: '🚨', name: 'Συναγερμός', desc: 'Ειδοποιήσεις', type: 'output', unit: '' }
             ]
         };
 
-        // Translations
+        // ==================== SCENARIO DEFINITIONS ====================
+        const scenarios = {
+            warehouse: [
+                { type: 'plc', x: 300, y: 200 },
+                { type: 'temp-sensor', x: 100, y: 150 },
+                { type: 'humidity-sensor', x: 100, y: 250 },
+                { type: 'gateway', x: 500, y: 200 }
+            ],
+            temperature: [
+                { type: 'temp-sensor', x: 100, y: 180 },
+                { type: 'plc', x: 300, y: 180 },
+                { type: 'motor', x: 500, y: 120 },
+                { type: 'alarm', x: 500, y: 240 }
+            ],
+            inventory: [
+                { type: 'motion-sensor', x: 100, y: 150 },
+                { type: 'plc', x: 300, y: 150 },
+                { type: 'gateway', x: 500, y: 150 },
+                { type: 'alarm', x: 300, y: 280 }
+            ]
+        };
+
+        // ==================== TRANSLATIONS ====================
         const translations = {
             en: {
-                'lang-btn-text': 'Ελληνικά',
-                'components-title': 'Components',
-                'canvas-title': 'Workspace',
-                'stats-title': 'Statistics',
-                'scenarios-title': 'Scenarios',
-                'projects-title': 'My Projects',
-                'drop-hint-text': 'Drag components here',
-                'btn-start': '▶️ Start',
-                'btn-stop': '⏹️ Stop',
-                'btn-save': '💾 Save',
-                'btn-export': '📸 Export PNG',
-                'btn-clear': '🗑️ Clear',
-                'status-text': 'Ready. Sign in to save projects.',
-                'status-running': 'Simulation running...',
-                'status-stopped': 'Simulation stopped.',
-                'stat-components-label': 'Components',
-                'stat-connections-label': 'Connections',
-                'stat-data-label': 'Data/sec',
-                'scenario-warehouse': '📦 Warehouse Monitor',
-                'scenario-temp': '🌡️ Temperature Control',
-                'scenario-inventory': '📊 Inventory Tracking',
-                'footer-text': 'Built for <a href="https://ai-automation.gr" target="_blank">AI-Automation.gr</a> | Industrial IoT & Automation Solutions',
-                'signin-btn': 'Sign In',
-                'logout-btn': 'Logout',
-                'login-title': 'Sign In',
-                'register-title': 'Create Account',
-                'save-title': 'Save Project',
-                'login-email-label': 'Email',
-                'login-password-label': 'Password',
-                'register-name-label': 'Full Name (Optional)',
-                'register-email-label': 'Email',
-                'register-password-label': 'Password',
-                'project-name-label': 'Project Name',
-                'project-desc-label': 'Description (Optional)',
-                'login-btn': 'Sign In',
-                'register-btn': 'Create Account',
-                'save-project-btn': 'Save Project',
-                'no-account-text': "Don't have an account?",
-                'register-link': 'Register',
-                'have-account-text': 'Already have an account?',
-                'login-link': 'Sign In',
-                'delete': 'Delete',
-                'load': 'Load',
-                'user': 'User',
-                'admin': 'Admin'
+                headerTitle: 'IoT Builder',
+                langText: 'Ελληνικά',
+                authBtnText: 'Sign In',
+                logoutText: 'Logout',
+                componentsTitle: 'Components',
+                workspaceTitle: 'Workspace',
+                simulateBtnText: 'Start',
+                stopBtnText: 'Stop',
+                clearBtnText: 'Clear',
+                saveBtnText: 'Save',
+                loadBtnText: 'Load',
+                exportBtnText: 'Export PNG',
+                statsTitle: 'Statistics',
+                componentsLabel: 'COMPONENTS',
+                connectionsLabel: 'CONNECTIONS',
+                dataSecLabel: 'DATA/SEC',
+                scenariosTitle: 'Scenarios',
+                scenario1Name: 'Warehouse Monitor',
+                scenario1Desc: 'PLC + Sensors + Gateway',
+                scenario2Name: 'Temperature Control',
+                scenario2Desc: 'Sensors + Actuators + Alarm',
+                scenario3Name: 'Inventory Tracking',
+                scenario3Desc: 'Motion + PLC + Gateway',
+                placeholderText: 'Drag components here',
+                statusText: 'Ready. Sign in to save projects.',
+                authModalTitle: 'Authentication',
+                loginTab: 'Login',
+                signupTab: 'Sign Up',
+                emailLabel1: 'Email',
+                emailLabel2: 'Email',
+                passwordLabel1: 'Password',
+                passwordLabel2: 'Password',
+                fullNameLabel: 'Full Name',
+                loginSubmitText: 'Login',
+                signupSubmitText: 'Create Account',
+                saveModalTitle: 'Save Project',
+                projectNameLabel: 'Project Name',
+                projectDescLabel: 'Description (optional)',
+                saveCancelText: 'Cancel',
+                saveConfirmText: 'Save',
+                loadModalTitle: 'Load Project',
+                adminRole: 'ADMIN',
+                userRole: 'USER',
+                loadBtnTextShort: 'Load',
+                deleteBtnText: 'Delete'
             },
             gr: {
-                'lang-btn-text': 'English',
-                'components-title': 'Εξαρτήματα',
-                'canvas-title': 'Χώρος Εργασίας',
-                'stats-title': 'Στατιστικά',
-                'scenarios-title': 'Σενάρια',
-                'projects-title': 'Τα Έργα μου',
-                'drop-hint-text': 'Σύρετε εξαρτήματα εδώ',
-                'btn-start': '▶️ Έναρξη',
-                'btn-stop': '⏹️ Διακοπή',
-                'btn-save': '💾 Αποθήκευση',
-                'btn-export': '📸 Εξαγωγή PNG',
-                'btn-clear': '🗑️ Καθαρισμός',
-                'status-text': 'Έτοιμο. Συνδεθείτε για αποθήκευση.',
-                'status-running': 'Η προσομοίωση εκτελείται...',
-                'status-stopped': 'Η προσομοίωση διακόπηκε.',
-                'stat-components-label': 'Εξαρτήματα',
-                'stat-connections-label': 'Συνδέσεις',
-                'stat-data-label': 'Δεδομένα/δευτ.',
-                'scenario-warehouse': '📦 Παρακολούθηση Αποθήκης',
-                'scenario-temp': '🌡️ Έλεγχος Θερμοκρασίας',
-                'scenario-inventory': '📊 Παρακολούθηση Αποθέματος',
-                'footer-text': 'Δημιουργήθηκε για το <a href="https://ai-automation.gr" target="_blank">AI-Automation.gr</a> | Λύσεις Βιομηχανικού IoT',
-                'signin-btn': 'Σύνδεση',
-                'logout-btn': 'Αποσύνδεση',
-                'login-title': 'Σύνδεση',
-                'register-title': 'Δημιουργία Λογαριασμού',
-                'save-title': 'Αποθήκευση Έργου',
-                'login-email-label': 'Email',
-                'login-password-label': 'Κωδικός',
-                'register-name-label': 'Ονοματεπώνυμο (Προαιρετικό)',
-                'register-email-label': 'Email',
-                'register-password-label': 'Κωδικός',
-                'project-name-label': 'Όνομα Έργου',
-                'project-desc-label': 'Περιγραφή (Προαιρετική)',
-                'login-btn': 'Σύνδεση',
-                'register-btn': 'Δημιουργία Λογαριασμού',
-                'save-project-btn': 'Αποθήκευση Έργου',
-                'no-account-text': 'Δεν έχετε λογαριασμό;',
-                'register-link': 'Εγγραφή',
-                'have-account-text': 'Έχετε ήδη λογαριασμό;',
-                'login-link': 'Σύνδεση',
-                'delete': 'Διαγραφή',
-                'load': 'Φόρτωση',
-                'user': 'Χρήστης',
-                'admin': 'Διαχειριστής'
+                headerTitle: 'IoT Builder',
+                langText: 'English',
+                authBtnText: 'Σύνδεση',
+                logoutText: 'Αποσύνδεση',
+                componentsTitle: 'Εξαρτήματα',
+                workspaceTitle: 'Χώρος Εργασίας',
+                simulateBtnText: 'Έναρξη',
+                stopBtnText: 'Διακοπή',
+                clearBtnText: 'Καθαρισμός',
+                saveBtnText: 'Αποθήκευση',
+                loadBtnText: 'Φόρτωση',
+                exportBtnText: 'Εξαγωγή PNG',
+                statsTitle: 'Στατιστικά',
+                componentsLabel: 'ΕΞΑΡΤΗΜΑΤΑ',
+                connectionsLabel: 'ΣΥΝΔΕΣΕΙΣ',
+                dataSecLabel: 'ΔΕΔΟΜΕΝΑ/ΔΕΥ',
+                scenariosTitle: 'Σενάρια',
+                scenario1Name: 'Παρακολούθηση Αποθήκης',
+                scenario1Desc: 'PLC + Αισθητήρες + Πύλη',
+                scenario2Name: 'Έλεγχος Θερμοκρασίας',
+                scenario2Desc: 'Αισθητήρες + Ενεργοποιητές + Συναγερμός',
+                scenario3Name: 'Παρακολούθηση Αποθέματος',
+                scenario3Desc: 'Κίνηση + PLC + Πύλη',
+                placeholderText: 'Σύρετε εξαρτήματα εδώ',
+                statusText: 'Έτοιμο. Συνδεθείτε για αποθήκευση.',
+                authModalTitle: 'Πιστοποίηση',
+                loginTab: 'Σύνδεση',
+                signupTab: 'Εγγραφή',
+                emailLabel1: 'Email',
+                emailLabel2: 'Email',
+                passwordLabel1: 'Κωδικός',
+                passwordLabel2: 'Κωδικός',
+                fullNameLabel: 'Ονοματεπώνυμο',
+                loginSubmitText: 'Σύνδεση',
+                signupSubmitText: 'Δημιουργία Λογαριασμού',
+                saveModalTitle: 'Αποθήκευση Έργου',
+                projectNameLabel: 'Όνομα Έργου',
+                projectDescLabel: 'Περιγραφή (προαιρετική)',
+                saveCancelText: 'Ακύρωση',
+                saveConfirmText: 'Αποθήκευση',
+                loadModalTitle: 'Φόρτωση Έργου',
+                adminRole: 'ΔΙΑΧΕΙΡΙΣΤΗΣ',
+                userRole: 'ΧΡΗΣΤΗΣ',
+                loadBtnTextShort: 'Φόρτωση',
+                deleteBtnText: 'Διαγραφή'
             }
         };
 
-        // Initialize
-        function init() {
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
             renderComponents();
-            updateLanguage();
             updateStats();
-        }
+        });
 
-        // Auth functions
         function checkAuth() {
             const token = localStorage.getItem('iot_token');
             const user = localStorage.getItem('iot_user');
@@ -1192,419 +1246,140 @@
             if (token && user) {
                 authToken = token;
                 currentUser = JSON.parse(user);
-                updateUIForAuth();
-                loadUserProjects();
+                updateUIForLoggedIn();
             }
         }
 
-        function updateUIForAuth() {
-            if (currentUser) {
-                document.getElementById('guest-controls').style.display = 'none';
-                document.getElementById('user-controls').style.display = 'block';
-                document.getElementById('user-email').textContent = currentUser.email;
-                document.getElementById('user-avatar').textContent = currentUser.email[0].toUpperCase();
-                
-                const roleText = currentUser.role === 'admin' ? translations[currentLang]['admin'] : translations[currentLang]['user'];
-                const limitText = currentUser.role === 'admin' ? ' (∞)' : ` (${currentUser.project_count || 0}/3)`;
-                document.getElementById('user-role-text').textContent = roleText;
-                document.getElementById('project-limit-text').textContent = limitText;
-                
-                if (currentUser.role === 'admin') {
-                    document.getElementById('admin-badge').style.display = 'block';
-                }
-                
-                document.getElementById('projects-section').style.display = 'block';
-                document.getElementById('btn-save').disabled = false;
-                
-                updateStatusText();
-            } else {
-                document.getElementById('guest-controls').style.display = 'flex';
-                document.getElementById('user-controls').style.display = 'none';
-                document.getElementById('projects-section').style.display = 'none';
-                document.getElementById('btn-save').disabled = true;
-            }
-        }
-
-        function updateStatusText() {
-            if (simulationRunning) {
-                document.getElementById('status-text').textContent = translations[currentLang]['status-running'];
-            } else if (currentUser) {
-                document.getElementById('status-text').textContent = currentLang === 'en' ? 
-                    'Ready to simulate. Add components and save!' : 
-                    'Έτοιμο. Προσθέστε εξαρτήματα και αποθηκεύστε!';
-            } else {
-                document.getElementById('status-text').textContent = translations[currentLang]['status-text'];
-            }
-        }
-
-        async function handleLogin(event) {
-            event.preventDefault();
+        function updateUIForLoggedIn() {
+            document.getElementById('authBtn').style.display = 'none';
+            document.getElementById('userSection').style.display = 'block';
+            document.getElementById('userEmail').textContent = currentUser.email;
             
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+            const roleText = currentUser.is_admin ? translations[currentLang].adminRole : translations[currentLang].userRole;
+            document.getElementById('userRole').textContent = roleText;
             
-            try {
-                const response = await fetch(`${API_URL}/api/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    currentUser = data.user;
-                    localStorage.setItem('iot_token', authToken);
-                    localStorage.setItem('iot_user', JSON.stringify(currentUser));
-                    closeAuthModal();
-                    updateUIForAuth();
-                    loadUserProjects();
-                    showAlert('success', currentLang === 'en' ? 'Login successful!' : 'Επιτυχής σύνδεση!');
-                } else {
-                    showError('login-error', data.detail || 'Login failed');
-                }
-            } catch (error) {
-                showError('login-error', currentLang === 'en' ? 'Connection error' : 'Σφάλμα σύνδεσης');
-            }
+            updateStatusMessage();
         }
 
-        async function handleRegister(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const full_name = document.getElementById('register-name').value;
-            
-            try {
-                const response = await fetch(`${API_URL}/api/auth/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password, full_name })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    currentUser = data.user;
-                    localStorage.setItem('iot_token', authToken);
-                    localStorage.setItem('iot_user', JSON.stringify(currentUser));
-                    closeAuthModal();
-                    updateUIForAuth();
-                    showAlert('success', currentLang === 'en' ? 'Account created!' : 'Λογαριασμός δημιουργήθηκε!');
-                } else {
-                    showError('register-error', data.detail || 'Registration failed');
-                }
-            } catch (error) {
-                showError('register-error', currentLang === 'en' ? 'Connection error' : 'Σφάλμα σύνδεσης');
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('iot_token');
-            localStorage.removeItem('iot_user');
-            authToken = null;
+        function updateUIForLoggedOut() {
+            document.getElementById('authBtn').style.display = 'flex';
+            document.getElementById('userSection').style.display = 'none';
             currentUser = null;
-            updateUIForAuth();
-            clearCanvas();
-            showAlert('success', currentLang === 'en' ? 'Logged out' : 'Αποσυνδεθήκατε');
+            authToken = null;
+            updateStatusMessage();
         }
 
-        // Project functions
-        async function loadUserProjects() {
-            if (!authToken) return;
+        function updateStatusMessage() {
+            const msg = document.getElementById('statusMessage');
+            const t = translations[currentLang];
             
-            try {
-                const response = await fetch(`${API_URL}/api/projects`, {
-                    headers: { 'Authorization': `Bearer ${authToken}` }
-                });
-                
-                if (response.ok) {
-                    const projects = await response.json();
-                    renderProjects(projects);
+            if (!currentUser) {
+                msg.innerHTML = `<span id="statusText">${t.statusText}</span>`;
+            } else if (simulationRunning) {
+                msg.innerHTML = `<span style="color: #10b981;">● Simulation running...</span>`;
+            } else {
+                msg.innerHTML = `<span style="color: #06b6d4;">● Ready</span>`;
+            }
+        }
+
+        // ==================== LANGUAGE SWITCHING ====================
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'gr' : 'en';
+            applyTranslations();
+            renderComponents();
+            
+            // Update placed components
+            placedComponents.forEach(comp => {
+                const compData = componentTypes[currentLang].find(c => c.id === comp.componentId);
+                if (compData) {
+                    comp.name = compData.name;
+                    const element = document.getElementById(comp.id);
+                    if (element) {
+                        element.querySelector('.placed-name').textContent = compData.name;
+                    }
                 }
-            } catch (error) {
-                console.error('Error loading projects:', error);
-            }
-        }
-
-        function renderProjects(projects) {
-            const list = document.getElementById('project-list');
-            list.innerHTML = '';
-            
-            if (projects.length === 0) {
-                list.innerHTML = `<p style="text-align: center; color: var(--text-secondary);">${currentLang === 'en' ? 'No projects yet' : 'Δεν υπάρχουν έργα ακόμα'}</p>`;
-                return;
-            }
-            
-            projects.forEach(project => {
-                const item = document.createElement('div');
-                item.className = 'project-item';
-                item.innerHTML = `
-                    <div class="project-info">
-                        <h4>${project.name}</h4>
-                        <p>${new Date(project.updated_at).toLocaleDateString()}</p>
-                    </div>
-                    <div class="project-actions">
-                        <button class="icon-btn" onclick="loadProject(${project.id})" title="${translations[currentLang]['load']}">📂</button>
-                        <button class="icon-btn" onclick="deleteProject(${project.id})" title="${translations[currentLang]['delete']}">🗑️</button>
-                    </div>
-                `;
-                list.appendChild(item);
             });
         }
 
-        async function loadProject(projectId) {
-            if (!authToken) return;
+        function applyTranslations() {
+            const t = translations[currentLang];
             
-            try {
-                const response = await fetch(`${API_URL}/api/projects/${projectId}`, {
-                    headers: { 'Authorization': `Bearer ${authToken}` }
-                });
-                
-                if (response.ok) {
-                    const project = await response.json();
-                    currentProjectId = project.id;
-                    placedComponents = project.canvas_data.components || [];
-                    componentCounter = project.canvas_data.counter || 0;
-                    renderAllComponents();
-                    updateStats();
-                    updateDropHint();
-                    showAlert('success', currentLang === 'en' ? `Loaded: ${project.name}` : `Φορτώθηκε: ${project.name}`);
-                }
-            } catch (error) {
-                showAlert('error', currentLang === 'en' ? 'Error loading project' : 'Σφάλμα φόρτωσης');
-            }
-        }
-
-        async function deleteProject(projectId) {
-            if (!authToken) return;
+            document.getElementById('headerTitle').textContent = t.headerTitle;
+            document.getElementById('langText').textContent = t.langText;
+            document.getElementById('authBtnText').textContent = t.authBtnText;
+            if (document.getElementById('logoutText')) document.getElementById('logoutText').textContent = t.logoutText;
+            document.getElementById('componentsTitle').textContent = t.componentsTitle;
+            document.getElementById('workspaceTitle').textContent = t.workspaceTitle;
+            document.getElementById('simulateBtnText').textContent = t.simulateBtnText;
+            if (document.getElementById('stopBtnText')) document.getElementById('stopBtnText').textContent = t.stopBtnText;
+            document.getElementById('clearBtnText').textContent = t.clearBtnText;
+            document.getElementById('saveBtnText').textContent = t.saveBtnText;
+            document.getElementById('loadBtnText').textContent = t.loadBtnText;
+            document.getElementById('exportBtnText').textContent = t.exportBtnText;
+            document.getElementById('statsTitle').textContent = t.statsTitle;
+            document.getElementById('componentsLabel').textContent = t.componentsLabel;
+            document.getElementById('connectionsLabel').textContent = t.connectionsLabel;
+            document.getElementById('dataSecLabel').textContent = t.dataSecLabel;
+            document.getElementById('scenariosTitle').textContent = t.scenariosTitle;
+            document.getElementById('scenario1Name').textContent = t.scenario1Name;
+            document.getElementById('scenario1Desc').textContent = t.scenario1Desc;
+            document.getElementById('scenario2Name').textContent = t.scenario2Name;
+            document.getElementById('scenario2Desc').textContent = t.scenario2Desc;
+            document.getElementById('scenario3Name').textContent = t.scenario3Name;
+            document.getElementById('scenario3Desc').textContent = t.scenario3Desc;
+            document.getElementById('placeholderText').textContent = t.placeholderText;
+            document.getElementById('authModalTitle').textContent = t.authModalTitle;
+            document.getElementById('loginTab').textContent = t.loginTab;
+            document.getElementById('signupTab').textContent = t.signupTab;
+            document.getElementById('emailLabel1').textContent = t.emailLabel1;
+            document.getElementById('emailLabel2').textContent = t.emailLabel2;
+            document.getElementById('passwordLabel1').textContent = t.passwordLabel1;
+            document.getElementById('passwordLabel2').textContent = t.passwordLabel2;
+            document.getElementById('fullNameLabel').textContent = t.fullNameLabel;
+            document.getElementById('loginSubmitText').textContent = t.loginSubmitText;
+            document.getElementById('signupSubmitText').textContent = t.signupSubmitText;
+            document.getElementById('saveModalTitle').textContent = t.saveModalTitle;
+            document.getElementById('projectNameLabel').textContent = t.projectNameLabel;
+            document.getElementById('projectDescLabel').textContent = t.projectDescLabel;
+            document.getElementById('saveCancelText').textContent = t.saveCancelText;
+            document.getElementById('saveConfirmText').textContent = t.saveConfirmText;
+            document.getElementById('loadModalTitle').textContent = t.loadModalTitle;
             
-            if (!confirm(currentLang === 'en' ? 'Delete this project?' : 'Διαγραφή έργου;')) return;
-            
-            try {
-                const response = await fetch(`${API_URL}/api/projects/${projectId}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${authToken}` }
-                });
-                
-                if (response.ok) {
-                    loadUserProjects();
-                    if (currentProjectId === projectId) {
-                        currentProjectId = null;
-                    }
-                    showAlert('success', currentLang === 'en' ? 'Project deleted' : 'Το έργο διαγράφηκε');
-                    
-                    // Update user info
-                    const userResponse = await fetch(`${API_URL}/api/auth/me`, {
-                        headers: { 'Authorization': `Bearer ${authToken}` }
-                    });
-                    if (userResponse.ok) {
-                        currentUser = await userResponse.json();
-                        localStorage.setItem('iot_user', JSON.stringify(currentUser));
-                        updateUIForAuth();
-                    }
-                }
-            } catch (error) {
-                showAlert('error', currentLang === 'en' ? 'Error deleting' : 'Σφάλμα διαγραφής');
-            }
-        }
-
-        async function handleSaveProject(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('project-name').value;
-            const description = document.getElementById('project-desc').value;
-            
-            const canvasData = {
-                components: placedComponents,
-                counter: componentCounter
-            };
-            
-            try {
-                let response;
-                if (currentProjectId) {
-                    // Update existing
-                    response = await fetch(`${API_URL}/api/projects/${currentProjectId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${authToken}`
-                        },
-                        body: JSON.stringify({ name, description, canvas_data: canvasData })
-                    });
-                } else {
-                    // Create new
-                    response = await fetch(`${API_URL}/api/projects`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${authToken}`
-                        },
-                        body: JSON.stringify({ name, description, canvas_data: canvasData })
-                    });
-                }
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    currentProjectId = data.id;
-                    closeSaveModal();
-                    loadUserProjects();
-                    showAlert('success', currentLang === 'en' ? 'Project saved!' : 'Το έργο αποθηκεύτηκε!');
-                    
-                    // Update user info
-                    const userResponse = await fetch(`${API_URL}/api/auth/me`, {
-                        headers: { 'Authorization': `Bearer ${authToken}` }
-                    });
-                    if (userResponse.ok) {
-                        currentUser = await userResponse.json();
-                        localStorage.setItem('iot_user', JSON.stringify(currentUser));
-                        updateUIForAuth();
-                    }
-                } else {
-                    showError('save-error', data.detail || 'Save failed');
-                }
-            } catch (error) {
-                showError('save-error', currentLang === 'en' ? 'Connection error' : 'Σφάλμα σύνδεσης');
-            }
-        }
-
-        // Export PNG function
-        async function exportPNG() {
-            const canvas = document.getElementById('canvas');
-            
-            try {
-                const pngCanvas = await html2canvas(canvas, {
-                    backgroundColor: '#0a0e27',
-                    scale: 2
-                });
-                
-                pngCanvas.toBlob(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.download = `iot-diagram-${Date.now()}.png`;
-                    link.href = url;
-                    link.click();
-                    URL.revokeObjectURL(url);
-                    
-                    showAlert('success', currentLang === 'en' ? 'PNG exported!' : 'PNG εξήχθη!');
-                });
-            } catch (error) {
-                showAlert('error', currentLang === 'en' ? 'Export failed' : 'Η εξαγωγή απέτυχε');
-            }
-        }
-
-        // Modal functions
-		function openAuthModal() {
-			document.getElementById('auth-modal').classList.add('active');
-			showLogin();
-		  }
-
-        function closeAuthModal() {
-            document.getElementById('auth-modal').classList.remove('active');
-            document.getElementById('login-error').innerHTML = '';
-            document.getElementById('register-error').innerHTML = '';
-        }
-
-        function showLogin() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('register-form').style.display = 'none';
-        }
-
-        function showRegister() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'block';
-        }
-
-        function openSaveModal() {
-            if (!currentUser) {
-                showAlert('warning', currentLang === 'en' ? 'Please sign in first' : 'Παρακαλώ συνδεθείτε πρώτα');
-                return;
+            if (currentUser) {
+                const roleText = currentUser.is_admin ? t.adminRole : t.userRole;
+                document.getElementById('userRole').textContent = roleText;
             }
             
-            if (placedComponents.length === 0) {
-                showAlert('warning', currentLang === 'en' ? 'Add components first' : 'Προσθέστε εξαρτήματα πρώτα');
-                return;
-            }
-            
-            document.getElementById('save-modal').classList.add('active');
+            updateStatusMessage();
         }
 
-        function closeSaveModal() {
-            document.getElementById('save-modal').classList.remove('active');
-            document.getElementById('project-name').value = '';
-            document.getElementById('project-desc').value = '';
-            document.getElementById('save-error').innerHTML = '';
-        }
-
-        // UI Helper functions
-        function showError(elementId, message) {
-            const el = document.getElementById(elementId);
-            el.innerHTML = `<div class="alert alert-error">${message}</div>`;
-        }
-
-        function showAlert(type, message) {
-            const statusDiv = document.getElementById('sim-status');
-            const oldClass = statusDiv.className;
-            statusDiv.className = `simulation-status ${type === 'success' ? 'running' : ''}`;
-            statusDiv.querySelector('#status-text').textContent = message;
-            
-            setTimeout(() => {
-                statusDiv.className = oldClass;
-                updateStatusText();
-            }, 3000);
-        }
-
-        // Language toggle
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'gr' : 'en';
-            updateLanguage();
-            renderComponents();
-            renderAllComponents();
-        }
-
-        function updateLanguage() {
-            const trans = translations[currentLang];
-            for (let key in trans) {
-                const element = document.getElementById(key);
-                if (element) {
-                    if (key === 'footer-text') {
-                        element.innerHTML = trans[key];
-                    } else {
-                        element.textContent = trans[key];
-                    }
-                }
-            }
-            updateUIForAuth();
-        }
-
-        // Component rendering
+        // ==================== COMPONENTS RENDERING ====================
         function renderComponents() {
-            const library = document.getElementById('components-library');
+            const library = document.getElementById('componentLibrary');
             library.innerHTML = '';
             
             componentTypes[currentLang].forEach(comp => {
-                const item = document.createElement('div');
-                item.className = 'component-item';
-                item.draggable = true;
-                item.ondragstart = (e) => drag(e, comp);
+                const div = document.createElement('div');
+                div.className = 'component-item';
+                div.draggable = true;
+                div.dataset.componentId = comp.id;
                 
-                item.innerHTML = `
+                div.innerHTML = `
                     <div class="component-icon">${comp.icon}</div>
                     <div class="component-info">
-                        <h4>${comp.name}</h4>
-                        <p>${comp.desc}</p>
+                        <div class="component-name">${comp.name}</div>
+                        <div class="component-desc">${comp.desc}</div>
                     </div>
                 `;
-                library.appendChild(item);
+                
+                div.addEventListener('dragstart', drag);
+                library.appendChild(div);
             });
         }
 
-        // Drag & Drop
-        function drag(ev, componentData) {
-            ev.dataTransfer.setData('component', JSON.stringify(componentData));
+        // ==================== DRAG & DROP ====================
+        function drag(ev) {
+            ev.dataTransfer.setData('componentId', ev.target.closest('.component-item').dataset.componentId);
         }
 
         function allowDrop(ev) {
@@ -1612,215 +1387,647 @@
             document.getElementById('canvas').classList.add('drag-over');
         }
 
-        function dragLeave(ev) {
-            document.getElementById('canvas').classList.remove('drag-over');
-        }
-
         function drop(ev) {
             ev.preventDefault();
-            document.getElementById('canvas').classList.remove('drag-over');
-            
-            const componentData = JSON.parse(ev.dataTransfer.getData('component'));
             const canvas = document.getElementById('canvas');
+            canvas.classList.remove('drag-over');
+            
+            const componentId = ev.dataTransfer.getData('componentId');
+            const compData = componentTypes[currentLang].find(c => c.id === componentId);
+            
+            if (!compData) return;
+            
             const rect = canvas.getBoundingClientRect();
+            const x = ev.clientX - rect.left + canvas.scrollLeft - 65;
+            const y = ev.clientY - rect.top + canvas.scrollTop - 65;
             
-            const x = ev.clientX - rect.left - 60;
-            const y = ev.clientY - rect.top - 40;
+            addComponent(compData, x, y);
             
-            addComponent(componentData, x, y);
-            updateDropHint();
+            // Hide placeholder
+            document.getElementById('canvasPlaceholder').style.display = 'none';
         }
 
-        function addComponent(componentData, x, y) {
-            componentCounter++;
-            const id = `comp-${componentCounter}`;
+        function addComponent(compData, x, y) {
+            const id = 'comp-' + (++componentCounter);
             
             const component = {
                 id: id,
-                data: componentData,
+                componentId: compData.id,
+                name: compData.name,
+                icon: compData.icon,
+                type: compData.type,
+                unit: compData.unit,
                 x: x,
                 y: y,
-                value: getInitialValue(componentData),
-                active: false
+                value: getInitialValue(compData)
             };
             
             placedComponents.push(component);
             renderPlacedComponent(component);
             updateStats();
-            currentProjectId = null; // Mark as unsaved
         }
 
-        function getInitialValue(componentData) {
-            switch(componentData.type) {
+        function getInitialValue(compData) {
+            switch (compData.type) {
                 case 'sensor':
-                    if (componentData.id === 'temp-sensor') return 22;
-                    if (componentData.id === 'humidity-sensor') return 45;
-                    if (componentData.id === 'motion-sensor') return 0;
-                    return 0;
+                    if (compData.id === 'temp-sensor') return '22';
+                    if (compData.id === 'humidity-sensor') return '45';
+                    if (compData.id === 'motion-sensor') return 'OFF';
+                    return '0';
                 case 'actuator':
-                    return 0;
+                    return '0';
+                case 'controller':
+                case 'gateway':
+                case 'output':
+                    return 'IDLE';
                 default:
-                    return 0;
+                    return '--';
             }
         }
 
         function renderPlacedComponent(component) {
             const canvas = document.getElementById('canvas');
+            
             const div = document.createElement('div');
             div.className = 'placed-component';
             div.id = component.id;
             div.style.left = component.x + 'px';
             div.style.top = component.y + 'px';
             
-            const statusText = component.active ?
-                (currentLang === 'en' ? 'Active' : 'Ενεργό') :
-                (currentLang === 'en' ? 'Inactive' : 'Ανενεργό');
-            
-            const deleteText = translations[currentLang]['delete'];
-            
             div.innerHTML = `
-                <div class="component-header">
-                    <span>${component.data.icon}</span>
-                    <span>${component.data.name}</span>
-                </div>
-                ${component.data.unit ? `
-                    <div class="component-value ${simulationRunning ? 'pulse' : ''}">
-                        ${component.value}${component.data.unit}
-                    </div>
-                ` : ''}
-                <div class="component-status">${statusText}</div>
-                <div class="component-controls">
-                    <button class="component-btn delete-btn" onclick="deleteComponent('${component.id}')">
-                        ${deleteText}
-                    </button>
-                </div>
+                <button class="component-remove" onclick="removeComponent('${component.id}')">×</button>
+                <div class="placed-icon">${component.icon}</div>
+                <div class="placed-name">${component.name}</div>
+                <div class="placed-value">${component.value}${component.unit}</div>
             `;
             
+            makeDraggable(div);
             canvas.appendChild(div);
         }
 
-        function deleteComponent(id) {
-            placedComponents = placedComponents.filter(c => c.id !== id);
-            const element = document.getElementById(id);
-            if (element) element.remove();
-            updateStats();
-            updateDropHint();
-            currentProjectId = null; // Mark as unsaved
-        }
-
-        function renderAllComponents() {
-            document.querySelectorAll('.placed-component').forEach(el => el.remove());
-            placedComponents.forEach(comp => renderPlacedComponent(comp));
-        }
-
-        // Simulation
-        function startSimulation() {
-            if (placedComponents.length === 0) {
-                showAlert('warning', currentLang === 'en' ? 'Add components first!' : 'Προσθέστε εξαρτήματα πρώτα!');
-                return;
+        function makeDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            
+            element.onmousedown = dragMouseDown;
+            
+            function dragMouseDown(e) {
+                if (e.target.classList.contains('component-remove')) return;
+                
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
             }
             
-            simulationRunning = true;
-            const statusDiv = document.getElementById('sim-status');
-            statusDiv.classList.add('running');
-            statusDiv.querySelector('#status-text').textContent = translations[currentLang]['status-running'];
-            
-            placedComponents.forEach(comp => comp.active = true);
-            
-            simulationInterval = setInterval(() => {
-                updateSimulation();
-            }, 1000);
-        }
-
-        function stopSimulation() {
-            simulationRunning = false;
-            clearInterval(simulationInterval);
-            
-            const statusDiv = document.getElementById('sim-status');
-            statusDiv.classList.remove('running');
-            updateStatusText();
-            
-            placedComponents.forEach(comp => comp.active = false);
-            renderAllComponents();
-        }
-
-        function updateSimulation() {
-            placedComponents.forEach(comp => {
-                if (comp.data.type === 'sensor') {
-                    if (comp.data.id === 'temp-sensor') {
-                        comp.value = (20 + Math.random() * 10).toFixed(1);
-                    } else if (comp.data.id === 'humidity-sensor') {
-                        comp.value = (40 + Math.random() * 20).toFixed(0);
-                    } else if (comp.data.id === 'motion-sensor') {
-                        comp.value = Math.random() > 0.5 ? 1 : 0;
-                    }
-                } else if (comp.data.type === 'actuator') {
-                    comp.value = Math.floor(Math.random() * 100);
+            function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                
+                const newTop = element.offsetTop - pos2;
+                const newLeft = element.offsetLeft - pos1;
+                
+                element.style.top = Math.max(0, newTop) + 'px';
+                element.style.left = Math.max(0, newLeft) + 'px';
+                
+                // Update position in array
+                const comp = placedComponents.find(c => c.id === element.id);
+                if (comp) {
+                    comp.x = element.offsetLeft;
+                    comp.y = element.offsetTop;
                 }
-            });
+            }
             
-            renderAllComponents();
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        function removeComponent(id) {
+            const element = document.getElementById(id);
+            if (element) element.remove();
+            
+            placedComponents = placedComponents.filter(c => c.id !== id);
             updateStats();
+            
+            if (placedComponents.length === 0) {
+                document.getElementById('canvasPlaceholder').style.display = 'block';
+            }
         }
 
         function clearCanvas() {
             if (placedComponents.length === 0) return;
             
-            if (confirm(currentLang === 'en' ? 'Clear all components?' : 'Καθαρισμός όλων;')) {
-                stopSimulation();
-                placedComponents = [];
-                document.querySelectorAll('.placed-component').forEach(el => el.remove());
-                updateStats();
-                updateDropHint();
-                currentProjectId = null;
+            const msg = currentLang === 'en' ? 
+                'Clear all components?' : 
+                'Καθαρισμός όλων των εξαρτημάτων;';
+            
+            if (!confirm(msg)) return;
+            
+            placedComponents = [];
+            document.getElementById('canvas').innerHTML = '<div class="canvas-placeholder" id="canvasPlaceholder"><div class="canvas-placeholder-icon">🎯</div><div class="canvas-placeholder-text" id="placeholderText">' + translations[currentLang].placeholderText + '</div></div>';
+            updateStats();
+            
+            if (simulationRunning) {
+                toggleSimulation();
             }
         }
 
+        // ==================== SIMULATION ====================
+        function toggleSimulation() {
+            if (placedComponents.length === 0) {
+                showAlert(currentLang === 'en' ? 'Add components first' : 'Προσθέστε εξαρτήματα πρώτα', 'warning');
+                return;
+            }
+            
+            simulationRunning = !simulationRunning;
+            
+            const startBtn = document.getElementById('simulateBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            
+            if (simulationRunning) {
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'flex';
+                simulationInterval = setInterval(updateSimulation, 1500);
+            } else {
+                startBtn.style.display = 'flex';
+                stopBtn.style.display = 'none';
+                if (simulationInterval) {
+                    clearInterval(simulationInterval);
+                    simulationInterval = null;
+                }
+                dataPerSec = 0;
+                document.getElementById('dataSecCount').textContent = '0';
+            }
+            
+            updateStatusMessage();
+        }
+
+        function updateSimulation() {
+            let dataPoints = 0;
+            
+            placedComponents.forEach(comp => {
+                const element = document.getElementById(comp.id);
+                if (!element) return;
+                
+                element.classList.add('active');
+                
+                // Update value based on component type
+                if (comp.type === 'sensor') {
+                    if (comp.componentId === 'temp-sensor') {
+                        comp.value = (18 + Math.random() * 10).toFixed(1);
+                        dataPoints++;
+                    } else if (comp.componentId === 'humidity-sensor') {
+                        comp.value = (35 + Math.random() * 30).toFixed(0);
+                        dataPoints++;
+                    } else if (comp.componentId === 'motion-sensor') {
+                        comp.value = Math.random() > 0.6 ? 'ON' : 'OFF';
+                        dataPoints++;
+                    }
+                } else if (comp.type === 'actuator') {
+                    comp.value = (Math.random() * 100).toFixed(0);
+                    dataPoints++;
+                } else if (comp.type === 'controller' || comp.type === 'gateway') {
+                    comp.value = Math.random() > 0.2 ? 'ACTIVE' : 'IDLE';
+                    dataPoints++;
+                } else if (comp.type === 'output') {
+                    comp.value = Math.random() > 0.8 ? 'ALERT' : 'OK';
+                    dataPoints++;
+                }
+                
+                const valueDiv = element.querySelector('.placed-value');
+                if (valueDiv) {
+                    valueDiv.textContent = comp.value + comp.unit;
+                }
+                
+                setTimeout(() => {
+                    element.classList.remove('active');
+                }, 700);
+            });
+            
+            dataPerSec = dataPoints;
+            document.getElementById('dataSecCount').textContent = dataPerSec;
+        }
+
         function updateStats() {
-            document.getElementById('stat-components').textContent = placedComponents.length;
-            const activeConnections = Math.floor(placedComponents.length * 1.5);
-            document.getElementById('stat-connections').textContent = activeConnections;
-            document.getElementById('stat-data').textContent = simulationRunning ? placedComponents.length * 2 : 0;
+            document.getElementById('componentsCount').textContent = placedComponents.length;
+            
+            // Calculate connections (simplified: components - 1)
+            const connections = Math.max(0, placedComponents.length - 1);
+            document.getElementById('connectionsCount').textContent = connections;
         }
 
-        function updateDropHint() {
-            const hint = document.getElementById('drop-hint');
-            hint.style.display = placedComponents.length === 0 ? 'block' : 'none';
-        }
-
-        // Scenarios
+        // ==================== SCENARIOS ====================
         function loadScenario(type) {
             if (placedComponents.length > 0) {
-                if (!confirm(currentLang === 'en' ? 
-                    'This will clear current workspace. Continue?' : 
-                    'Αυτό θα καθαρίσει τον χώρο. Συνέχεια;')) {
-                    return;
-                }
+                const msg = currentLang === 'en' ? 
+                    'This will clear current components. Continue?' : 
+                    'Θα διαγραφούν τα τρέχοντα εξαρτήματα. Συνέχεια;';
+                
+                if (!confirm(msg)) return;
             }
             
             clearCanvas();
             
-            const scenarios = {
-                warehouse: [
-                    { type: 'temp-sensor', x: 100, y: 100 },
-                    { type: 'humidity-sensor', x: 300, y: 100 },
-                    { type: 'motion-sensor', x: 500, y: 100 },
-                    { type: 'plc', x: 300, y: 300 },
-                    { type: 'gateway', x: 100, y: 400 }
-                ],
-                temperature: [
-                    { type: 'temp-sensor', x: 150, y: 100 },
-                    { type: 'plc', x: 150, y: 250 },
-                    { type: 'motor', x: 350, y: 250 },
-                    { type: 'alarm', x: 350, y: 100 }
-                ],
-                inventory: [
-                    { type: 'motion-sensor', x: 100, y: 100 },
-                    { type: 'plc', x: 250, y: 200 },
-                    { type: 'gateway', x: 400, y: 200 },
-                    { type: 'alarm', x: 250, y: 350 }
-                ]
-            };
-</script>        
+            const scenarioComponents = scenarios[type];
+            scenarioComponents.forEach(sc => {
+                const compData = componentTypes[currentLang].find(c => c.id === sc.type);
+                if (compData) {
+                    addComponent(compData, sc.x, sc.y);
+                }
+            });
+        }
 
-       
+        // ==================== AUTHENTICATION ====================
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.getElementById('authAlert').innerHTML = '';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.getElementById('loginTab').classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.getElementById('signupTab').classList.add('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+            
+            document.getElementById('authAlert').innerHTML = '';
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showAuthAlert('Please fill all fields', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    authToken = data.access_token;
+                    currentUser = data.user;
+                    
+                    localStorage.setItem('iot_token', authToken);
+                    localStorage.setItem('iot_user', JSON.stringify(currentUser));
+                    
+                    updateUIForLoggedIn();
+                    closeAuthModal();
+                    
+                    showAlert(currentLang === 'en' ? 'Login successful!' : 'Επιτυχής σύνδεση!', 'success');
+                } else {
+                    showAuthAlert(data.detail || 'Login failed', 'error');
+                }
+            } catch (error) {
+                showAuthAlert('Connection error. Please try again.', 'error');
+                console.error('Login error:', error);
+            }
+        }
+
+        async function handleSignup() {
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const fullName = document.getElementById('signupFullName').value.trim();
+            
+            if (!email || !password || !fullName) {
+                showAuthAlert('Please fill all fields', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showAuthAlert('Password must be at least 6 characters', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, full_name: fullName })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAuthAlert(currentLang === 'en' ? 'Account created! Please login.' : 'Λογαριασμός δημιουργήθηκε! Συνδεθείτε.', 'success');
+                    setTimeout(() => {
+                        switchAuthTab('login');
+                        document.getElementById('loginEmail').value = email;
+                    }, 1500);
+                } else {
+                    showAuthAlert(data.detail || 'Registration failed', 'error');
+                }
+            } catch (error) {
+                showAuthAlert('Connection error. Please try again.', 'error');
+                console.error('Signup error:', error);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('iot_token');
+            localStorage.removeItem('iot_user');
+            
+            updateUIForLoggedOut();
+            clearCanvas();
+            
+            showAlert(currentLang === 'en' ? 'Logged out successfully' : 'Αποσυνδεθήκατε επιτυχώς', 'info');
+        }
+
+        function showAuthAlert(message, type) {
+            const alert = document.getElementById('authAlert');
+            alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '80px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.minWidth = '300px';
+            alertDiv.style.animation = 'slideIn 0.3s ease';
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 3000);
+        }
+
+        // ==================== PROJECT MANAGEMENT ====================
+        function openSaveModal() {
+            if (!authToken) {
+                showAlert(currentLang === 'en' ? 'Please login to save projects' : 'Συνδεθείτε για αποθήκευση', 'warning');
+                openAuthModal();
+                return;
+            }
+            
+            if (placedComponents.length === 0) {
+                showAlert(currentLang === 'en' ? 'Add components first' : 'Προσθέστε εξαρτήματα πρώτα', 'warning');
+                return;
+            }
+            
+            document.getElementById('saveModal').classList.add('active');
+            document.getElementById('saveAlert').innerHTML = '';
+            document.getElementById('projectName').value = '';
+            document.getElementById('projectDesc').value = '';
+        }
+
+        function closeSaveModal() {
+            document.getElementById('saveModal').classList.remove('active');
+        }
+
+        async function saveProject() {
+            const name = document.getElementById('projectName').value.trim();
+            const description = document.getElementById('projectDesc').value.trim();
+            
+            if (!name) {
+                showSaveAlert(currentLang === 'en' ? 'Please enter a project name' : 'Εισάγετε όνομα έργου', 'error');
+                return;
+            }
+            
+            const projectData = {
+                components: placedComponents.map(c => ({
+                    componentId: c.componentId,
+                    x: c.x,
+                    y: c.y
+                }))
+            };
+            
+            try {
+                // Check project limit for non-admin users
+                if (!currentUser.is_admin) {
+                    const projectsResponse = await fetch(`${API_URL}/projects`, {
+                        headers: { 'Authorization': `Bearer ${authToken}` }
+                    });
+                    const projects = await projectsResponse.json();
+                    
+                    if (projects.length >= 3) {
+                        showSaveAlert(currentLang === 'en' ? 
+                            'You can only save up to 3 projects. Delete one first.' : 
+                            'Μπορείτε να αποθηκεύσετε μέχρι 3 έργα. Διαγράψτε ένα πρώτα.', 'warning');
+                        return;
+                    }
+                }
+                
+                const response = await fetch(`${API_URL}/projects`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        name,
+                        description,
+                        data: projectData
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    currentProjectId = data.id;
+                    showSaveAlert(currentLang === 'en' ? 'Project saved successfully!' : 'Το έργο αποθηκεύτηκε!', 'success');
+                    setTimeout(() => {
+                        closeSaveModal();
+                    }, 1500);
+                } else {
+                    showSaveAlert(data.detail || 'Failed to save project', 'error');
+                }
+            } catch (error) {
+                showSaveAlert('Connection error. Please try again.', 'error');
+                console.error('Save error:', error);
+            }
+        }
+
+        function showSaveAlert(message, type) {
+            const alert = document.getElementById('saveAlert');
+            alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        async function openLoadModal() {
+            if (!authToken) {
+                showAlert(currentLang === 'en' ? 'Please login to load projects' : 'Συνδεθείτε για φόρτωση', 'warning');
+                openAuthModal();
+                return;
+            }
+            
+            document.getElementById('loadModal').classList.add('active');
+            document.getElementById('loadAlert').innerHTML = `<div class="alert alert-info">${currentLang === 'en' ? 'Loading projects...' : 'Φόρτωση έργων...'}</div>`;
+            
+            try {
+                const response = await fetch(`${API_URL}/projects`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                
+                const projects = await response.json();
+                
+                if (response.ok) {
+                    renderProjectList(projects);
+                } else {
+                    showLoadAlert('Failed to load projects', 'error');
+                }
+            } catch (error) {
+                showLoadAlert('Connection error. Please try again.', 'error');
+                console.error('Load error:', error);
+            }
+        }
+
+        function closeLoadModal() {
+            document.getElementById('loadModal').classList.remove('active');
+        }
+
+        function renderProjectList(projects) {
+            const listDiv = document.getElementById('projectList');
+            const t = translations[currentLang];
+            
+            if (projects.length === 0) {
+                listDiv.innerHTML = `<div class="alert alert-info">${currentLang === 'en' ? 'No saved projects' : 'Δεν υπάρχουν αποθηκευμένα έργα'}</div>`;
+                document.getElementById('loadAlert').innerHTML = '';
+                return;
+            }
+            
+            listDiv.innerHTML = projects.map(p => {
+                const date = new Date(p.updated_at).toLocaleDateString();
+                const compCount = p.data.components ? p.data.components.length : 0;
+                
+                return `
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-name">${p.name}</div>
+                            <div class="project-actions">
+                                <button class="btn btn-cyan" onclick="loadProjectData(${p.id})">
+                                    ${t.loadBtnTextShort}
+                                </button>
+                                <button class="btn btn-pink" onclick="deleteProject(${p.id})">
+                                    ${t.deleteBtnText}
+                                </button>
+                            </div>
+                        </div>
+                        ${p.description ? `<div class="project-desc">${p.description}</div>` : ''}
+                        <div class="project-meta">
+                            <span>📦 ${compCount} components</span>
+                            <span>📅 ${date}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('loadAlert').innerHTML = '';
+        }
+
+        async function loadProjectData(projectId) {
+            try {
+                const response = await fetch(`${API_URL}/projects/${projectId}`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                
+                const project = await response.json();
+                
+                if (response.ok) {
+                    clearCanvas();
+                    currentProjectId = projectId;
+                    
+                    if (project.data && project.data.components) {
+                        project.data.components.forEach(comp => {
+                            const compData = componentTypes[currentLang].find(c => c.id === comp.componentId);
+                            if (compData) {
+                                addComponent(compData, comp.x, comp.y);
+                            }
+                        });
+                    }
+                    
+                    closeLoadModal();
+                    showAlert(currentLang === 'en' ? 'Project loaded!' : 'Το έργο φορτώθηκε!', 'success');
+                } else {
+                    showLoadAlert('Failed to load project', 'error');
+                }
+            } catch (error) {
+                showLoadAlert('Connection error. Please try again.', 'error');
+                console.error('Load project error:', error);
+            }
+        }
+
+        async function deleteProject(projectId) {
+            const msg = currentLang === 'en' ? 
+                'Delete this project?' : 
+                'Διαγραφή αυτού του έργου;';
+            
+            if (!confirm(msg)) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/projects/${projectId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                
+                if (response.ok) {
+                    showAlert(currentLang === 'en' ? 'Project deleted' : 'Το έργο διαγράφηκε', 'success');
+                    openLoadModal(); // Refresh list
+                } else {
+                    showLoadAlert('Failed to delete project', 'error');
+                }
+            } catch (error) {
+                showLoadAlert('Connection error. Please try again.', 'error');
+                console.error('Delete error:', error);
+            }
+        }
+
+        function showLoadAlert(message, type) {
+            const alert = document.getElementById('loadAlert');
+            alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        // ==================== PNG EXPORT ====================
+        async function exportToPNG() {
+            if (placedComponents.length === 0) {
+                showAlert(currentLang === 'en' ? 'Add components first' : 'Προσθέστε εξαρτήματα πρώτα', 'warning');
+                return;
+            }
+            
+            const canvas = document.getElementById('canvas');
+            
+            try {
+                const canvasEl = await html2canvas(canvas, {
+                    backgroundColor: '#0f1923',
+                    scale: 2
+                });
+                
+                const link = document.createElement('a');
+                link.download = 'iot-setup-' + Date.now() + '.png';
+                link.href = canvasEl.toDataURL();
+                link.click();
+                
+                showAlert(currentLang === 'en' ? 'PNG exported!' : 'PNG εξήχθη!', 'success');
+            } catch (error) {
+                showAlert('Export failed. Please try again.', 'error');
+                console.error('Export error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
