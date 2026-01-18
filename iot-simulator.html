@@ -2612,6 +2612,10 @@
 				console.error('Password reset error:', error);
 			}
 		}
+		function showForgotAlert(message, type) {
+            const alert = document.getElementById('forgotAlert');
+            alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
     </script>
 	<!-- Reset Password Modal -->
 	<div class="modal" id="resetPasswordModal">
