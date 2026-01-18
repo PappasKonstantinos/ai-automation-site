@@ -567,6 +567,37 @@
             font-family: inherit;
         }
 
+        /* Password Input with Toggle */
+        .password-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-input-wrapper input {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: #06b6d4;
+        }
+
         .modal-actions {
             display: flex;
             gap: 10px;
@@ -934,6 +965,10 @@
                 <div class="user-info">
                     <span class="user-email" id="userEmail"></span>
                     <span class="user-role" id="userRole"></span>
+                    <button class="btn btn-dark" id="adminUsersBtn" onclick="openAdminUsersModal()" style="display: none;">
+                        <span>👥</span>
+                        <span id="adminUsersText">Users</span>
+                    </button>
                     <button class="btn btn-dark" id="adminSettingsBtn" onclick="openAdminModal()" style="display: none;">
                         <span>⚙️</span>
                         <span id="adminSettingsText">Settings</span>
@@ -1088,7 +1123,17 @@
                 </div>
                 <div class="form-group">
                     <label id="passwordLabel1">Password</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('loginPassword', this)">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+                <div style="text-align: right; margin-top: -10px; margin-bottom: 15px;">
+                    <a href="#" onclick="openForgotPasswordModal(); return false;" style="color: #06b6d4; font-size: 13px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#06b6d4'">
+                        <span id="forgotPasswordLink">Forgot Password?</span>
+                    </a>
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-cyan" onclick="handleLogin()">
@@ -1105,11 +1150,22 @@
                 </div>
                 <div class="form-group">
                     <label id="passwordLabel2">Password</label>
-                    <input type="password" id="signupPassword" placeholder="••••••••" required>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="signupPassword" placeholder="••••••••" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('signupPassword', this)">
+                            👁️
+                        </button>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label id="fullNameLabel">Full Name</label>
                     <input type="text" id="signupFullName" placeholder="John Doe" required>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="newsletterOptIn" style="width: auto; margin: 0;">
+                    <label for="newsletterOptIn" id="newsletterLabel" style="margin: 0; cursor: pointer; user-select: none;">
+                        Receive updates and news about new features
+                    </label>
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-green" onclick="handleSignup()">
@@ -1174,15 +1230,30 @@
             <!-- Password Change Section -->
             <div class="form-group">
                 <label id="currentPassLabel">Current Password</label>
-                <input type="password" id="adminCurrentPass" placeholder="••••••••" required>
+                <div class="password-input-wrapper">
+                    <input type="password" id="adminCurrentPass" placeholder="••••••••" required>
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility('adminCurrentPass', this)">
+                        👁️
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label id="newPassLabel">New Password</label>
-                <input type="password" id="adminNewPass" placeholder="••••••••" required>
+                <div class="password-input-wrapper">
+                    <input type="password" id="adminNewPass" placeholder="••••••••" required>
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility('adminNewPass', this)">
+                        👁️
+                    </button>
+                </div>
             </div>
             <div class="form-group">
                 <label id="confirmPassLabel">Confirm New Password</label>
-                <input type="password" id="adminConfirmPass" placeholder="••••••••" required>
+                <div class="password-input-wrapper">
+                    <input type="password" id="adminConfirmPass" placeholder="••••••••" required>
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility('adminConfirmPass', this)">
+                        👁️
+                    </button>
+                </div>
             </div>
 
             <div class="modal-actions">
@@ -1196,6 +1267,37 @@
             </div>
 
             <div id="adminAlert" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeForgotPasswordModal()">×</button>
+            <h2 id="forgotPasswordTitle">Reset Password</h2>
+
+            <div class="alert alert-info" id="forgotPasswordInfo">
+                <span id="forgotPasswordInfoText">
+                    Please contact the administrator at <strong>admin@ai-automation.gr</strong> to reset your password.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label id="forgotEmailLabel">Your Email</label>
+                <input type="email" id="forgotEmail" placeholder="your@email.com" required>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-dark" onclick="closeForgotPasswordModal()">
+                    <span id="forgotCancelText">Cancel</span>
+                </button>
+                <button class="btn btn-cyan" onclick="requestPasswordReset()">
+                    <span class="btn-icon">📧</span>
+                    <span id="forgotSubmitText">Request Reset</span>
+                </button>
+            </div>
+
+            <div id="forgotAlert" style="margin-top: 15px;"></div>
         </div>
     </div>
 
@@ -1296,6 +1398,7 @@
                 passwordLabel1: 'Password',
                 passwordLabel2: 'Password',
                 fullNameLabel: 'Full Name',
+                newsletterLabel: 'Receive updates and news about new features',
                 loginSubmitText: 'Login',
                 signupSubmitText: 'Create Account',
                 saveModalTitle: 'Save Project',
@@ -1314,7 +1417,18 @@
                 newPassLabel: 'New Password',
                 confirmPassLabel: 'Confirm New Password',
                 adminCancelText: 'Cancel',
-                adminChangeText: 'Change Password'
+                adminChangeText: 'Change Password',
+                forgotPasswordLink: 'Forgot Password?',
+                forgotPasswordTitle: 'Reset Password',
+                forgotPasswordInfoText: 'Please contact the administrator at <strong>admin@ai-automation.gr</strong> to reset your password.',
+                forgotEmailLabel: 'Your Email',
+                forgotCancelText: 'Cancel',
+                forgotSubmitText: 'Request Reset',
+				resetPasswordTitle: 'Set New Password',
+				resetPasswordInfo: 'Create a strong password (minimum 6 characters)',
+				resetNewPassLabel: 'New Password',
+				resetConfirmPassLabel: 'Confirm New Password',
+				resetSubmitBtnText: 'Set New Password'
             },
             gr: {
                 headerTitle: 'IoT Builder',
@@ -1350,6 +1464,7 @@
                 passwordLabel1: 'Κωδικός',
                 passwordLabel2: 'Κωδικός',
                 fullNameLabel: 'Ονοματεπώνυμο',
+                newsletterLabel: 'Λήψη ενημερώσεων και νέων για νέες δυνατότητες',
                 loginSubmitText: 'Σύνδεση',
                 signupSubmitText: 'Δημιουργία Λογαριασμού',
                 saveModalTitle: 'Αποθήκευση Έργου',
@@ -1368,7 +1483,18 @@
                 newPassLabel: 'Νέος Κωδικός',
                 confirmPassLabel: 'Επιβεβαίωση Νέου Κωδικού',
                 adminCancelText: 'Ακύρωση',
-                adminChangeText: 'Αλλαγή Κωδικού'
+                adminChangeText: 'Αλλαγή Κωδικού',
+                forgotPasswordLink: 'Ξεχάσατε τον Κωδικό;',
+                forgotPasswordInfoText: 'Παρακαλώ επικοινωνήστε με τον διαχειριστή στο <strong>admin@ai-automation.gr</strong> για επαναφορά κωδικού.',
+                forgotPasswordTitle: 'Επαναφορά Κωδικού',
+                forgotEmailLabel: 'Το Email σας',
+                forgotCancelText: 'Ακύρωση',
+                forgotSubmitText: 'Αίτημα Επαναφοράς',
+				resetPasswordTitle: 'Ορισμός Νέου Κωδικού',
+				resetPasswordInfo: 'Δημιουργήστε ισχυρό κωδικό (τουλάχιστον 6 χαρακτήρες)',
+				resetNewPassLabel: 'Νέος Κωδικός',
+				resetConfirmPassLabel: 'Επιβεβαίωση Νέου Κωδικού',
+				resetSubmitBtnText: 'Ορισμός Νέου Κωδικού'
             }
         };
 
@@ -1379,7 +1505,22 @@
             updateStats();
             checkBackendStatus(); // Initial check
             setInterval(checkBackendStatus, 30000); // Check every 30 seconds
+			checkResetToken();
         });
+		
+		
+		function checkResetToken() {
+			const urlParams = new URLSearchParams(window.location.search);
+			const resetToken = urlParams.get('reset_token');
+			
+			if (resetToken) {
+				// Remove token from URL (clean URL)
+				window.history.replaceState({}, document.title, window.location.pathname);
+				
+				// Show reset password modal
+				openResetPasswordModal(resetToken);
+			}
+		}
 
         function checkAuth() {
             const token = localStorage.getItem('iot_token');
@@ -1545,6 +1686,7 @@
             document.getElementById('passwordLabel1').textContent = t.passwordLabel1;
             document.getElementById('passwordLabel2').textContent = t.passwordLabel2;
             document.getElementById('fullNameLabel').textContent = t.fullNameLabel;
+            if (document.getElementById('newsletterLabel')) document.getElementById('newsletterLabel').textContent = t.newsletterLabel;
             document.getElementById('loginSubmitText').textContent = t.loginSubmitText;
             document.getElementById('signupSubmitText').textContent = t.signupSubmitText;
             document.getElementById('saveModalTitle').textContent = t.saveModalTitle;
@@ -1562,6 +1704,21 @@
             if (document.getElementById('confirmPassLabel')) document.getElementById('confirmPassLabel').textContent = t.confirmPassLabel;
             if (document.getElementById('adminCancelText')) document.getElementById('adminCancelText').textContent = t.adminCancelText;
             if (document.getElementById('adminChangeText')) document.getElementById('adminChangeText').textContent = t.adminChangeText;
+            
+            // Forgot password translations
+            if (document.getElementById('forgotPasswordLink')) document.getElementById('forgotPasswordLink').textContent = t.forgotPasswordLink;
+            if (document.getElementById('forgotPasswordTitle')) document.getElementById('forgotPasswordTitle').textContent = t.forgotPasswordTitle;
+            if (document.getElementById('forgotPasswordInfoText')) document.getElementById('forgotPasswordInfoText').innerHTML = t.forgotPasswordInfoText;
+            if (document.getElementById('forgotEmailLabel')) document.getElementById('forgotEmailLabel').textContent = t.forgotEmailLabel;
+            if (document.getElementById('forgotCancelText')) document.getElementById('forgotCancelText').textContent = t.forgotCancelText;
+            if (document.getElementById('forgotSubmitText')) document.getElementById('forgotSubmitText').textContent = t.forgotSubmitText;
+			
+			// Reset password translations
+			if (document.getElementById('resetPasswordTitle')) document.getElementById('resetPasswordTitle').textContent = t.resetPasswordTitle;
+			if (document.getElementById('resetPasswordInfo')) document.getElementById('resetPasswordInfo').textContent = t.resetPasswordInfo;
+			if (document.getElementById('resetNewPassLabel')) document.getElementById('resetNewPassLabel').textContent = t.resetNewPassLabel;
+			if (document.getElementById('resetConfirmPassLabel')) document.getElementById('resetConfirmPassLabel').textContent = t.resetConfirmPassLabel;
+			if (document.getElementById('resetSubmitBtnText')) document.getElementById('resetSubmitBtnText').textContent = t.resetSubmitBtnText;
             
             if (currentUser) {
                 const roleText = currentUser.is_admin ? t.adminRole : t.userRole;
@@ -1927,6 +2084,7 @@
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
             const fullName = document.getElementById('signupFullName').value.trim();
+            const newsletterOptIn = document.getElementById('newsletterOptIn').checked;
             
             if (!email || !password || !fullName) {
                 showAuthAlert('Please fill all fields', 'error');
@@ -1942,7 +2100,12 @@
                 const response = await fetch(`${API_URL}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password, full_name: fullName })
+                    body: JSON.stringify({ 
+                        email, 
+                        password, 
+                        full_name: fullName,
+                        newsletter_subscribed: newsletterOptIn
+                    })
                 });
                 
                 const data = await response.json();
@@ -1995,6 +2158,93 @@
                 setTimeout(() => alertDiv.remove(), 300);
             }, 3000);
         }
+		
+		// ==================== RESET PASSWORD MODAL ====================
+		let currentResetToken = null;
+
+		function openResetPasswordModal(token) {
+			currentResetToken = token;
+			document.getElementById('resetPasswordModal').classList.add('active');
+			document.getElementById('resetAlert').innerHTML = '';
+			document.getElementById('resetNewPassword').value = '';
+			document.getElementById('resetConfirmPassword').value = '';
+		}
+
+		function closeResetPasswordModal() {
+			document.getElementById('resetPasswordModal').classList.remove('active');
+			currentResetToken = null;
+		}
+
+		async function submitNewPassword() {
+			const newPassword = document.getElementById('resetNewPassword').value;
+			const confirmPassword = document.getElementById('resetConfirmPassword').value;
+			
+			// Validation
+			if (!newPassword || !confirmPassword) {
+				showResetAlert(currentLang === 'en' ? 
+					'Please fill all fields' : 
+					'Συμπληρώστε όλα τα πεδία', 'error');
+				return;
+			}
+			
+			if (newPassword.length < 6) {
+				showResetAlert(currentLang === 'en' ? 
+					'Password must be at least 6 characters' : 
+					'Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες', 'error');
+				return;
+			}
+			
+			if (newPassword !== confirmPassword) {
+				showResetAlert(currentLang === 'en' ? 
+					'Passwords do not match' : 
+					'Οι κωδικοί δεν ταιριάζουν', 'error');
+				return;
+			}
+			
+			if (!currentResetToken) {
+				showResetAlert(currentLang === 'en' ? 
+					'Invalid reset link' : 
+					'Μη έγκυρος σύνδεσμος', 'error');
+				return;
+			}
+			
+			try {
+				const response = await fetch(`${API_URL}/reset-password`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						token: currentResetToken,
+						new_password: newPassword
+					})
+				});
+				
+				const data = await response.json();
+				
+				if (response.ok) {
+					showResetAlert(currentLang === 'en' ? 
+						'✅ Password reset successful! You can now login.' : 
+						'✅ Ο κωδικός άλλαξε επιτυχώς! Μπορείτε να συνδεθείτε.', 'success');
+					
+					setTimeout(() => {
+						closeResetPasswordModal();
+						openAuthModal(); // Open login modal
+					}, 2000);
+				} else {
+					showResetAlert(data.detail || (currentLang === 'en' ? 
+						'Reset failed. Link may be expired.' : 
+						'Η επαναφορά απέτυχε. Ο σύνδεσμος μπορεί να έληξε.'), 'error');
+				}
+			} catch (error) {
+				showResetAlert('Connection error. Please try again.', 'error');
+				console.error('Reset password error:', error);
+			}
+		}
+
+		function showResetAlert(message, type) {
+			const alert = document.getElementById('resetAlert');
+			alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+		}
+		
 
         // ==================== PROJECT MANAGEMENT ====================
         function openSaveModal() {
@@ -2302,32 +2552,108 @@
             alert.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
         }
 
-        // ==================== PNG EXPORT ====================
-        async function exportToPNG() {
-            if (placedComponents.length === 0) {
-                showAlert(currentLang === 'en' ? 'Add components first' : 'Προσθέστε εξαρτήματα πρώτα', 'warning');
-                return;
-            }
+        // ==================== PASSWORD VISIBILITY TOGGLE ====================
+        function togglePasswordVisibility(inputId, button) {
+            const input = document.getElementById(inputId);
             
-            const canvas = document.getElementById('canvas');
-            
-            try {
-                const canvasEl = await html2canvas(canvas, {
-                    backgroundColor: '#0f1923',
-                    scale: 2
-                });
-                
-                const link = document.createElement('a');
-                link.download = 'iot-setup-' + Date.now() + '.png';
-                link.href = canvasEl.toDataURL();
-                link.click();
-                
-                showAlert(currentLang === 'en' ? 'PNG exported!' : 'PNG εξήχθη!', 'success');
-            } catch (error) {
-                showAlert('Export failed. Please try again.', 'error');
-                console.error('Export error:', error);
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = '🙈'; // Hide icon
+            } else {
+                input.type = 'password';
+                button.textContent = '👁️'; // Show icon
             }
         }
+
+        // ==================== FORGOT PASSWORD ====================
+        function openForgotPasswordModal() {
+            closeAuthModal(); // Close auth modal if open
+            document.getElementById('forgotPasswordModal').classList.add('active');
+            document.getElementById('forgotAlert').innerHTML = '';
+            document.getElementById('forgotEmail').value = '';
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').classList.remove('active');
+        }
+
+        async function requestPasswordReset() {
+			const email = document.getElementById('forgotEmail').value.trim();
+			
+			if (!email) {
+				showForgotAlert(currentLang === 'en' ? 
+					'Please enter your email' : 
+					'Παρακαλώ εισάγετε το email σας', 'error');
+				return;
+			}
+			
+			try {
+				const response = await fetch(`${API_URL}/forgot-password`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ email })
+				});
+				
+				const data = await response.json();
+				
+				if (response.ok) {
+					showForgotAlert(currentLang === 'en' ? 
+						`✅ Password reset email sent to ${email}. Check your inbox!` :
+						`✅ Email επαναφοράς στάλθηκε στο ${email}. Ελέγξτε το inbox σας!`, 'success');
+					
+					setTimeout(() => {
+						closeForgotPasswordModal();
+					}, 3000);
+				} else {
+					showForgotAlert(data.detail || 'Request failed', 'error');
+				}
+			} catch (error) {
+				showForgotAlert('Connection error. Please try again.', 'error');
+				console.error('Password reset error:', error);
+			}
+		}
     </script>
+	<!-- Reset Password Modal -->
+	<div class="modal" id="resetPasswordModal">
+		<div class="modal-content">
+			<button class="modal-close" onclick="closeResetPasswordModal()">×</button>
+			<h2 id="resetPasswordTitle">Set New Password</h2>
+
+			<div class="alert alert-info" style="margin-bottom: 20px;">
+				<span id="resetPasswordInfo">
+					Create a strong password (minimum 6 characters)
+				</span>
+			</div>
+
+			<div class="form-group">
+				<label id="resetNewPassLabel">New Password</label>
+				<div class="password-input-wrapper">
+					<input type="password" id="resetNewPassword" placeholder="••••••••" required>
+					<button type="button" class="password-toggle" onclick="togglePasswordVisibility('resetNewPassword', this)">
+						👁️
+					</button>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label id="resetConfirmPassLabel">Confirm New Password</label>
+				<div class="password-input-wrapper">
+					<input type="password" id="resetConfirmPassword" placeholder="••••••••" required>
+					<button type="button" class="password-toggle" onclick="togglePasswordVisibility('resetConfirmPassword', this)">
+						👁️
+					</button>
+				</div>
+			</div>
+
+			<div class="modal-actions">
+				<button class="btn btn-cyan" onclick="submitNewPassword()">
+					<span class="btn-icon">🔐</span>
+					<span id="resetSubmitBtnText">Set New Password</span>
+				</button>
+			</div>
+
+			<div id="resetAlert" style="margin-top: 15px;"></div>
+		</div>
+	</div>
 </body>
 </html>
